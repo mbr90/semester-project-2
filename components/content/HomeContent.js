@@ -12,7 +12,7 @@ const container = "flex-col w-[210px] mx-auto xl:mx-0";
 
 export default function HomeContent() {
   return (
-    <section className="h-full flex-col gap-8 mt-10 xl:flex-row xl:flex xl:justify-center xl:gap-56">
+    <section className="h-full flex-col gap-8 mt-10 mb-10 xl:flex-row xl:mb-0 xl:flex xl:justify-center xl:gap-56">
       <div className={container}>
         <Image className={imageStyling} src={browse} alt="Phone being used" />
         <h2 className={textStyling}>Browse Auctions</h2>

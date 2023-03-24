@@ -24,8 +24,10 @@ export default function AuctionCard() {
         src={test}
         alt="testimage"
       />
-      <div className="w-full bg-burgundyVelvet h-[67px] flex text-myWhite text-[20px] justify-between px-10">
-        <h2 className="my-auto">150 Credits</h2>
+      <div className="w-full bg-burgundyVelvet h-[67px] flex text-myWhite text-[18px] justify-between px-10">
+        <h2 className="my-auto">
+          <span className="font-bold text-[24px]">150</span> Credits
+        </h2>
         <h2 className="my-auto">7 bidders</h2>
       </div>
       <div
@@ -55,7 +57,7 @@ export default function AuctionCard() {
         )}
       </div>
       <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
-        <div className="flex-col text-myWhite">
+        <div className="flex-col text-myWhite font-sans mr-4">
           <p className="mb-3">
             <span className="font-bold">Seller:</span> Nulla facilisi
           </p>
