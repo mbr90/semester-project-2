@@ -48,10 +48,10 @@ export default function AuctionCard() {
         </div>
 
         {!isClicked && (
-          <MdOutlineKeyboardArrowDown className="w-[30px] h-[30px] ml-auto mr-0" />
+          <MdOutlineKeyboardArrowDown className="w-[30px] h-[30px] ml-auto mr-0 mt-[5px]" />
         )}
         {isClicked && (
-          <MdOutlineKeyboardArrowUp className="w-[30px] h-[30px] ml-auto mr-0" />
+          <MdOutlineKeyboardArrowUp className="w-[30px] h-[30px] ml-auto mr-0 mt-[5px]" />
         )}
       </div>
       <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">

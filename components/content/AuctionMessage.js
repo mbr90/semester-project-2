@@ -36,7 +36,7 @@ export default function AuctionMessage() {
               </div>
             )}
             <input
-              className="ml-1 h-[51px] w-full rounded-r-lg pl-2 "
+              className="ml-1 h-[51px] w-full rounded-r-lg pl-2 focus:outline-sunnyOrange "
               type="search"
               id="auction-search"
               placeholder="Find Listings..."
