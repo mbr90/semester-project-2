@@ -14,8 +14,8 @@ export default function AuctionCard() {
     setIsClicked(!isClicked);
   };
 
-  const textMinimized = "line-clamp-3 font-sans text-[18px]  w-3/4  ";
-  const textMaximized = "line-clamp font-sans text-[18px]  w-3/4   ";
+  const textMinimized = "line-clamp-3 font-sans text-[18px]    ";
+  const textMaximized = "line-clamp font-sans text-[18px]     ";
 
   return (
     <section className="w-full min-h-[717px]  bg-midnightBlue max-w-[577px] mx-auto my-10 flex-col">
@@ -32,7 +32,7 @@ export default function AuctionCard() {
         onClick={clicked}
         className="p-mobMargin cursor-pointer text-myWhite flex w-full"
       >
-        <div className="w-5/6">
+        <div className="w-11/12">
           <h1 className="font-serif text-[27px]">Duis vesitbulum</h1>
           <p className={isClicked ? textMaximized : textMinimized}>
             An exclusive leather bag made from premium-grade leather. The

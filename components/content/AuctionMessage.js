@@ -1,10 +1,13 @@
 import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import Button from "../Button";
+import { useState } from "react";
 
-const optionStyling = " bg-myWhite font-semibold font-button";
+const optionStyling = "bg-myWhite font-semibold font-button";
 
 export default function AuctionMessage() {
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
   return (
     <section className="p-mobMargin">
       <div className="max-w-[577px] mx-auto">
@@ -25,16 +28,23 @@ export default function AuctionMessage() {
           </Link>
         </div>
 
-        <div className="relative flex mt-16 w-fit mx-auto h-fit ">
-          <div className="bg-myWhite rounded-l-lg h-[51px] w-[51px] flex  justify-center">
-            <BsSearch className="w-[30px] h-[30px] my-auto" />
+        <div className=" flex mt-16 w-full mx-auto h-fit justify-center  ">
+          <div className="flex group w-full">
+            {!isInputFocused && (
+              <div className="bg-myWhite rounded-l-lg  flex  justify-center  ">
+                <BsSearch className="w-[30px] h-[30px] m-[10px] my-auto" />
+              </div>
+            )}
+            <input
+              className="ml-1 h-[51px] w-full rounded-r-lg pl-2 "
+              type="search"
+              id="auction-search"
+              placeholder="Find Listings..."
+              onFocus={() => setIsInputFocused(true)}
+              onBlur={() => setIsInputFocused(false)}
+            ></input>
           </div>
-          <input
-            className="ml-1 rounded-r-lg pl-2"
-            type="search"
-            id="auction-search"
-            placeholder="Find Listings..."
-          ></input>
+
           <select
             className="ml-6 px-[16px] bg-sunnyOrange rounded-lg  text-xl font-semibold font-button h-[51px] drop-shadow-button "
             name="sortBy"
