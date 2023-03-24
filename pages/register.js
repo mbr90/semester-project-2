@@ -1,22 +1,19 @@
 import Head from "next/head";
 import Header from "@/components/content/Header";
-import Video from "@/components/content/Video";
 import Footer from "@/components/content/Footer";
-import HomeContent from "@/components/content/HomeContent";
 
-export default function Home() {
+export default function Register() {
   return (
     <>
       <Head>
-        <title>Salechampz</title>
-        <meta name="description" content="Making auctions great again" />
+        <title>Register Profile</title>
+        <meta name="description" content="Sign up to Salechampz" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
       <main className="flex-col min-h-screen">
-        <Video />
-        <HomeContent />
+        <h1 className="text-white text-6xl">This is where you register</h1>
       </main>
       <Footer />
     </>
