@@ -23,7 +23,7 @@ const socialMediaIcons = [
 
 export default function Footer() {
   return (
-    <footer className="flex-col xl:flex xl:flex-row xl:justify-between bg-midnightBlue min-h-[20px] px-10 py-10">
+    <footer className="flex-col xl:flex xl:flex-row xl:justify-between bg-midnightBlue min-h-[20px] px-10 py-10 mt-mobMargin">
       <div className="text-myWhite flex gap-2  justify-center w-[220px] mx-auto">
         {socialMediaIcons.map((socialMediaIcon) => (
           <div key={socialMediaIcon.name} className=" mx-2">

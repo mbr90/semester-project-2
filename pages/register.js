@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Header from "@/components/content/Header";
 import Footer from "@/components/content/Footer";
+import RegisterUser from "@/components/content/RegisterUser";
+import Return from "@/components/Return";
 
 export default function Register() {
   return (
@@ -13,7 +15,8 @@ export default function Register() {
       </Head>
       <Header />
       <main className="flex-col min-h-screen">
-        <h1 className="text-white text-6xl">This is where you register</h1>
+        <Return />
+        <RegisterUser />
       </main>
       <Footer />
     </>
