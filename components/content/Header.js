@@ -11,7 +11,7 @@ const activeLink = "flex text-myWhite font-bold underline";
 const sleepLink = "flex text-whyte";
 
 const burgerItem =
-  "hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin border-t-2 font-button  text-[20px]";
+  "hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin border-t-2 font-button  text-[20px] flex w-full";
 
 const burgerIcon = "w-[30px] h-[30px] mr-2";
 
@@ -80,32 +80,36 @@ export default function Header() {
             >
               <MdClose className={burgerIcon} />
             </li>
-            <li className={burgerItem}>
+            <Link href="/" className="flex">
               {" "}
-              <Link href="/" className="flex">
+              <li className={burgerItem}>
+                {" "}
                 <MdHome className={burgerIcon} />
                 Home
-              </Link>
-            </li>
-            <li className={burgerItem}>
+              </li>{" "}
+            </Link>
+            <Link href="/auction" className="flex">
               {" "}
-              <Link href="/auction" className="flex">
+              <li className={burgerItem}>
+                {" "}
                 <MdGavel className={burgerIcon} />
                 Auction
-              </Link>
-            </li>
-            <li className={burgerItem}>
-              <Link href="/login" className="flex">
+              </li>{" "}
+            </Link>
+            <Link href="/login" className="flex">
+              {" "}
+              <li className={burgerItem}>
                 <MdLogin className={burgerIcon} />
                 Sign In
-              </Link>
-            </li>
-            <li className={burgerItem}>
-              <Link href="/register" className="flex">
+              </li>{" "}
+            </Link>
+            <Link href="/register" className="flex">
+              {" "}
+              <li className={burgerItem}>
                 <MdPersonAdd className={burgerIcon} />
                 New User?
-              </Link>
-            </li>
+              </li>{" "}
+            </Link>
           </ul>
         </section>
       )}
