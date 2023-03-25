@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Header from "@/components/content/Header";
 import Footer from "@/components/content/Footer";
+import Return from "@/components/Return";
+import SignIn from "@/components/content/SignIn";
 
 export default function Login() {
   return (
@@ -13,7 +15,8 @@ export default function Login() {
       </Head>
       <Header />
       <main className="flex-col min-h-screen">
-        <h1 className="text-white text-6xl">This is where you log in</h1>
+        <Return />
+        <SignIn />
       </main>
       <Footer />
     </>

@@ -18,9 +18,9 @@ export default function AuctionCard() {
   const textMaximized = "line-clamp font-sans text-[18px]     ";
 
   return (
-    <section className="w-full min-h-[717px]  bg-midnightBlue max-w-[577px] mx-auto my-10 flex-col">
+    <section className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] mx-auto my-10 flex-col overflow-hidden">
       <Image
-        className="w-full h-[348px] my-auto object-cover"
+        className="w-full h-[348px] my-auto object-cover  shadow-lg hover:scale-105 transition-transform"
         src={test}
         alt="testimage"
       />
