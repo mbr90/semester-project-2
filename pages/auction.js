@@ -4,13 +4,26 @@ import Footer from "@/components/content/Footer";
 import AuctionMessage from "@/components/content/AuctionMessage";
 import AuctionVardV2 from "@/components/AuctionCardV2";
 import DataFetch from "@/components/api/fetch/DataFetch";
-import { useEffect, useState } from "react";
-import {
-  AuctionURL,
-  SellerFlag,
-  BidFlag,
-  ActiveFlag,
-} from "@/components/Variables";
+// import {
+//   AuctionURL,
+//   SellerFlag,
+//   BidFlag,
+//   ActiveFlag,
+// } from "@/components/Variables";
+
+const AuctionURL = "https://api.noroff.dev/api/v1/auction/listings";
+
+const BidFlag = "_bids=true";
+
+const SellerFlag = "_seller=true";
+
+const ActiveFlag = "_active=true";
+
+const LimitFlag = "limit=";
+
+const SortFlag = "sort=";
+
+const SortOrderFlag = "sortOrder=";
 
 const fullAuctionURL =
   AuctionURL +
