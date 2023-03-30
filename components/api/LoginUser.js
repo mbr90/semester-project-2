@@ -1,4 +1,6 @@
-import { LoginURL } from "../Variables";
+// import { LoginURL } from "../Variables";
+
+const LoginURL = "https://api.noroff.dev/api/v1/auction/auth/login";
 
 export default async function LoginUser(email, password, router) {
   try {

@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Header from "@/components/content/Header";
 import Footer from "@/components/content/Footer";
-import RenderProfile from "@/components/content/RenderProfile";
 
 export default function Profile() {
   return (
@@ -15,7 +14,6 @@ export default function Profile() {
       <Header />
       <main className="flex-col min-h-screen">
         <h1 className="text-white text-6xl">Profiles appears here</h1>
-        <RenderProfile />
       </main>
       <Footer />
     </>

@@ -6,7 +6,9 @@ import Link from "next/link";
 import Button from "../Button";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { LoginURL } from "../Variables";
+// import { LoginURL } from "../Variables";
+
+const LoginURL = "https://api.noroff.dev/api/v1/auction/auth/login";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

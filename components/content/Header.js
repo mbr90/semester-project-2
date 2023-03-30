@@ -19,8 +19,10 @@ import IsLoggedIn from "../tools/IsLoggedIn";
 import Logout from "../tools/Logout";
 import { getName } from "../tools/Utils";
 import GetProfileData from "../api/fetch/GetProfileData";
-import { ProfileURL } from "../Variables";
+// import { ProfileURL } from "../Variables";
 import Username from "../tools/Username";
+
+const ProfileURL = "https://api.noroff.dev/api/v1/auction/profiles/";
 
 const activeLink = "flex text-myWhite font-bold underline";
 const sleepLink = "flex text-whyte";

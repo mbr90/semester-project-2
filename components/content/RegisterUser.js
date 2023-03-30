@@ -9,7 +9,9 @@ import Button from "../Button";
 import LoginUser from "../api/LoginUser";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { RegisterURL } from "../Variables";
+// import { RegisterURL } from "../Variables";,
+
+const RegisterURL = "https://api.noroff.dev/api/v1/auction/auth/register";
 
 export default function RegisterUser() {
   const [name, setName] = useState("");
