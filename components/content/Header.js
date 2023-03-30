@@ -33,10 +33,7 @@ const burgerIcon = "w-[30px] h-[30px] mr-2";
 export default function Header() {
   const router = useRouter();
   const currentRoute = router.pathname;
-  // const data = GetProfileData({ endpoint: profileEndpoint });
-  // const userBids = GetProfileData({ endpoint: profileBids });
 
-  // const name = Username();
   let data;
   let userBids;
   if (Username()) {
@@ -45,8 +42,6 @@ export default function Header() {
     data = GetProfileData({ endpoint: profileEndpoint });
     userBids = GetProfileData({ endpoint: profileBids });
   }
-
-  console.log(data);
 
   const avatar = data?.avatar;
   const avatarUrl = avatar ? avatar : "/images/defaultProfile.jpg";
