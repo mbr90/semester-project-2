@@ -2,6 +2,9 @@ import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import Button from "../Button";
 import { useState } from "react";
+import IsLoggedIn from "../tools/IsLoggedIn";
+import { getName } from "../tools/Utils";
+import Greeting from "../tools/Greeting";
 
 const optionStyling = "bg-myWhite font-semibold font-button";
 
@@ -11,22 +14,38 @@ export default function AuctionMessage() {
   return (
     <section className="p-mobMargin">
       <div className="max-w-[577px] mx-auto">
-        <h1 className=" text-myWhite font-serif text-[27px] text-center">
-          Lets go Treasure-hunting!
-        </h1>
-        <h2 className="font-sans text-myWhite  text-[18px] mt-6 mb-10  w-fit mx-auto">
-          Register now and get 1000 credits to use right away.
-        </h2>
-        <div className="mx-auto w-fit h-[51px] ">
-          <Link href="/register">
-            <Button
-              textColor="text-myWhite"
-              content="REGISTER NOW"
-              bgColor="bg-cherryRed"
-              secColor="bg-myBlack"
-            />
-          </Link>
-        </div>
+        <IsLoggedIn
+          fallback={
+            <>
+              {" "}
+              <h1 className=" text-myWhite font-serif text-[27px] ">
+                Lets go Treasure-hunting!
+              </h1>
+              <h2 className="font-sans text-myWhite  text-[18px] mt-6 mb-10  w-fit ">
+                Register now and get 1000 credits to use right away.
+              </h2>
+              <div className="mx-auto w-fit h-[51px] ">
+                <Link href="/register">
+                  <Button
+                    textColor="text-myWhite"
+                    content="REGISTER NOW"
+                    bgColor="bg-cherryRed"
+                    secColor="bg-myBlack"
+                  />
+                </Link>
+              </div>
+            </>
+          }
+        >
+          <h1 className=" text-myWhite font-serif text-[27px] flex">
+            <Greeting />, {getName()}
+          </h1>
+          <h2 className="font-sans text-myWhite  text-[18px] mt-6 mb-10  w-fit ">
+            {
+              "Let's go Treasure-hunting! We're excited to have you here and can't wait for you to explore all the amazing items up for bid. Wishing you the best of luck and happy bidding."
+            }
+          </h2>
+        </IsLoggedIn>
 
         <div className=" flex mt-16 w-full mx-auto h-fit justify-center  ">
           <div className="flex group w-full">

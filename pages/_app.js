@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { Inter, Source_Sans_Pro, Abril_Fatface } from "next/font/google";
+import { Inter, Source_Sans_Pro, Abril_Fatface } from "@next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],

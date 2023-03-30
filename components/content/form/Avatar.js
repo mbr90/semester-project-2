@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-export default function Avatar() {
+export default function Avatar(props) {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    const value = event.target.value;
+    setInputValue(value);
+    props.onInputChange(value);
   };
 
   return (
@@ -17,7 +19,7 @@ export default function Avatar() {
               className="text-whyte text-[18px] font-sans absolute top-3 z-40 pl-[16px] cursor-pointer"
               htmlFor="avatar"
             >
-              Avatar
+              Avatar URL
             </label>
           )}
 
@@ -26,7 +28,7 @@ export default function Avatar() {
               className="text-whyte bg-midnightBlue text-[14px] font-sans absolute -top-3 l-2 z-40 ml-[16px] px-[4px] cursor-pointer"
               htmlFor="avatar"
             >
-              Avatar
+              Avatar URL
             </label>
           )}
 
@@ -39,9 +41,11 @@ export default function Avatar() {
             onBlur={() => setIsInputFocused(false)}
           ></input>
         </div>
-        <p className="text-myWhite font-sans font-medium text-[14px] px-[16px] py-1">
-          Optional (Help text)
-        </p>
+        {props.empty === "avatar" && (
+          <p className="text-sunnyOrange font-sans font-medium text-[14px] px-[16px] py-1">
+            {`Avatar is optional, but needs to be a valid url for instance: "https://img.service.com/avatar.jpg"`}
+          </p>
+        )}
       </div>
     </div>
   );
