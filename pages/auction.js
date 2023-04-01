@@ -4,12 +4,7 @@ import Footer from "@/components/content/Footer";
 import AuctionMessage from "@/components/content/AuctionMessage";
 import AuctionVardV2 from "@/components/AuctionCardV2";
 import DataFetch from "@/components/api/fetch/DataFetch";
-// import {
-//   AuctionURL,
-//   SellerFlag,
-//   BidFlag,
-//   ActiveFlag,
-// } from "@/components/Variables";
+import LoadingSpinner from "@/components/tools/LoadingSpinner";
 
 const AuctionURL = "https://api.noroff.dev/api/v1/auction/listings";
 
@@ -38,7 +33,7 @@ const fullAuctionURL =
 export default function Auction() {
   const { data, loading, error } = DataFetch(fullAuctionURL);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <div>Error: {error.message}</div>;
 
   // console.log(data);
@@ -75,6 +70,7 @@ export default function Auction() {
                 bid={highestBidAmount}
                 ends={item.endsAt}
                 seller={item.seller.name}
+                id={item.id}
               />
             );
           })}

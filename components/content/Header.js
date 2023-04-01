@@ -10,7 +10,6 @@ import {
 } from "react-icons/md";
 import { CgMenuRight, CgMenu } from "react-icons/cg";
 import { useState } from "react";
-
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -19,7 +18,6 @@ import IsLoggedIn from "../tools/IsLoggedIn";
 import Logout from "../tools/Logout";
 import { getName } from "../tools/Utils";
 import GetProfileData from "../api/fetch/GetProfileData";
-// import { ProfileURL } from "../Variables";
 import Username from "../tools/Username";
 
 const ProfileURL = "https://api.noroff.dev/api/v1/auction/profiles/";
@@ -55,7 +53,7 @@ export default function Header() {
 
   const handleLogout = () => {
     Logout();
-    router.reload();
+    router.push("/");
   };
 
   return (
@@ -192,7 +190,7 @@ export default function Header() {
                   New Listing
                 </li>{" "}
               </Link>
-              <Link href="/" className="flex">
+              <Link href={`/profiles/${getName()}`} className="flex">
                 <li className={burgerItem}>
                   {" "}
                   <img
@@ -203,7 +201,10 @@ export default function Header() {
                   Show Profile
                 </li>{" "}
               </Link>
-              <Link href="/" className="flex">
+              <Link
+                href={`/profiles/bids&listings/${getName()}`}
+                className="flex"
+              >
                 <li className={burgerItem}>
                   {" "}
                   <MdCurrencyExchange className={burgerIcon} /> My Bids &

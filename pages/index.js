@@ -16,6 +16,7 @@ export default function Home() {
       <Header />
       <main className="flex-col min-h-screen">
         <Video />
+
         <HomeContent />
       </main>
       <Footer />

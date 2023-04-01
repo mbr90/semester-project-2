@@ -5,6 +5,7 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import FormatDate from "./tools/FormatDate";
+import Link from "next/link";
 
 export default function AuctionCardReusable(props) {
   const {
@@ -15,6 +16,7 @@ export default function AuctionCardReusable(props) {
     bid = "0",
     ends = "12/12/2012 at 23:59:00",
     seller = "The seller",
+    id = "404",
   } = props;
 
   const [isClicked, setIsClicked] = useState(false);
@@ -42,11 +44,13 @@ export default function AuctionCardReusable(props) {
 
   return (
     <section className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] min-[578px]:rounded-lg mx-auto my-10 flex-col overflow-hidden">
-      <img
-        className="w-full h-[348px] my-auto object-cover shadow-lg hover:scale-105 transition-transform cursor-pointer"
-        src={image}
-        alt={title}
-      />
+      <Link href={`/auctions/${id}`}>
+        <img
+          className="w-full h-[348px] my-auto object-cover shadow-lg hover:scale-105 transition-transform cursor-pointer"
+          src={image}
+          alt={title}
+        />{" "}
+      </Link>
       <div className="w-full bg-burgundyVelvet h-[67px] flex text-myWhite text-[18px] justify-between px-10">
         <h2 className="my-auto">
           <span className="font-bold text-[24px]">{bid}</span> Credits
@@ -91,7 +95,10 @@ export default function AuctionCardReusable(props) {
           </p>
         </div>
 
-        <Button content="BID NOW" />
+        <Link href={`/auctions/${id}`}>
+          {" "}
+          <Button content="BID NOW" />
+        </Link>
       </div>
     </section>
   );
