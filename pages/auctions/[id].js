@@ -111,13 +111,16 @@ export default function AuctionItem({ data, id, errorMessage }) {
                 />
               )}
               {isModalOpen && (
-                <div className="fixed inset-0 h-full z-50  bg-myBlack bg-opacity-50">
-                  <div className="w-full h-full">
+                <div className="fixed inset-0 h-full z-50  bg-midnightBlue bg-opacity-90">
+                  <div
+                    className="w-full h-full pb-mobMargin"
+                    style={{ overflowY: "auto" }}
+                  >
                     <div className="w-fit h-fit mx-auto mt-40">
                       <img
                         src={data.media[currentSlide]}
                         alt={data.title}
-                        className=" object-contain max-h-[800px] max-w-[800px] min-w-[300px] min-h-[auto]  cursor-pointer"
+                        className=" object-contain max-h-[800px] max-w-full md:max-w-[800px] min-w-[300px] min-h-[auto]"
                       />
                     </div>
                     <div className="flex justify-center mt-mobMargin">
