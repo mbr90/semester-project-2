@@ -3,7 +3,12 @@ import Header from "@/components/content/Header";
 import Footer from "@/components/content/Footer";
 import Return from "@/components/Return";
 import RoundedButton from "@/components/RoundedButton";
-import { MdArrowBack, MdArrowForward, MdArrowBackIosNew } from "react-icons/md";
+import {
+  MdArrowBack,
+  MdArrowForward,
+  MdArrowBackIosNew,
+  MdClose,
+} from "react-icons/md";
 import { FaCrown } from "react-icons/fa";
 import { useState } from "react";
 import Button from "@/components/Button";
@@ -15,13 +20,16 @@ import { DateNTime } from "@/components/tools/FormatDate";
 import Username from "@/components/tools/Username";
 import BidOnAuction from "@/components/api/post/BidOnAuction";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function AuctionItem({ data, id, errorMessage }) {
+  const router = useRouter();
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isModal2Open, setModal2Open] = useState(false);
+  const [isModal2Open, setModal2Open] = useState(true);
   const [bid, setBid] = useState("");
   const [bidValid, setBidValid] = useState(false);
   const [emptyField, setEmptyField] = useState("");
+  const [bidError, setBidError] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   const defaultImage = "/images/defaultProduct.avif";
@@ -35,19 +43,29 @@ export default function AuctionItem({ data, id, errorMessage }) {
   };
 
   const validateBid = (value) => {
-    const valid = !isNaN(value);
+    const valid = value !== "" && !isNaN(value);
     setBidValid(valid);
     return valid;
   };
 
-  const handler = (e) => {
+  const handler = async (e) => {
     e.preventDefault();
     if (!bidValid) {
       setEmptyField("bid");
       return;
     }
-    BidOnAuction(bidEndpoint, amount);
-    setModal2Open(true);
+
+    try {
+      await BidOnAuction(bidEndpoint, amount);
+      setModal2Open(true);
+    } catch (error) {
+      setBidError(error.message);
+    }
+  };
+
+  const closeBid = () => {
+    setModal2Open(false);
+    router.reload();
   };
 
   const handleNext = () => {
@@ -185,8 +203,9 @@ export default function AuctionItem({ data, id, errorMessage }) {
                     onInputChange={bidValue}
                     label="Your Bid*"
                     validation="bid"
-                    error="Needs to be a number"
+                    error="You have to enter a bid higher than the current one"
                     empty={emptyField === "bid" && !bidValid ? "bid" : ""}
+                    type="number"
                   />
                 </div>
                 <ul className="flex-col font-sans text-[18px] text-myWhite">
@@ -200,9 +219,18 @@ export default function AuctionItem({ data, id, errorMessage }) {
                   <Button content="BID NOW" handler={handler} />
                 </div>
               </form>
+              <div className="text-sunnyOrange font-button text-[20px] w-fit mx-auto">
+                {bidError}
+              </div>
 
               {isModal2Open && (
                 <div className="fixed inset-0 h-full z-50  bg-midnightBlue bg-opacity-90">
+                  <div
+                    onClick={closeBid}
+                    className=" absolute top-1 right-5 lex justify-center mt-mobMargin cursor-pointer h-[40px] text-myWhite"
+                  >
+                    <MdClose className="h-[34px] w-[34px] hover:w-[40px] hover:h-[40px] my-auto" />
+                  </div>
                   <div className="w-full h-full relative">
                     <div className="flex-col justify-center align-middle w-full p-mobMargin mx-auto mt-40 text-myWhite">
                       <h1 className="font-serif text-center text-[27px]">
@@ -224,12 +252,6 @@ export default function AuctionItem({ data, id, errorMessage }) {
                             Return to Auction
                           </p>
                         </Link>
-                      </div>
-                      <div className="flex justify-center mt-mobMargin">
-                        <Button
-                          content="CLOSE"
-                          handler={() => setModal2Open(false)}
-                        />
                       </div>
                     </div>
                   </div>

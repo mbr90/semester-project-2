@@ -13,8 +13,17 @@ export default async function BidOnAuction(url, amount) {
     });
 
     const data = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(data.errors[0].message);
+      error.response = response;
+      throw error;
+    }
+
     console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }

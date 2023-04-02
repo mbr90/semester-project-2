@@ -35,7 +35,7 @@ export default function GenericInput(props) {
 
           <input
             id={props.label}
-            className="relative bg-midnightBlue border-sunnyOrange border-2 rounded-lg text-myWhite focus:outline-none cursor-pointer h-[51px] pl-[16px] w-full  "
+            className="relative bg-midnightBlue border-sunnyOrange border-2 rounded-lg text-myWhite focus:outline-none cursor-pointer h-[51px] px-[16px] w-full  "
             value={inputValue}
             onChange={handleInputChange}
             onFocus={() => setIsInputFocused(true)}
