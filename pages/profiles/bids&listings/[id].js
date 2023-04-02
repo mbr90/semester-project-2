@@ -3,6 +3,7 @@ import Header from "@/components/content/Header";
 import Footer from "@/components/content/Footer";
 import Return from "@/components/Return";
 import Link from "next/link";
+import BidsAndListings from "@/components/BidsAndListings";
 
 import Username from "@/components/tools/Username";
 
@@ -33,7 +34,7 @@ export default function BidsNListings() {
             </h1>
           </div>
         </div>
-        Here be bids
+        <BidsAndListings />
       </main>
       <Footer />
     </>

@@ -1,14 +1,13 @@
 import { useState } from "react";
-export default function GenericInput(props) {
+
+export default function TextArea(props) {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInputValue(value);
-    if (props.onInputChange) {
-      props.onInputChange(event.target.value);
-    }
+    props.onInputChange(value);
   };
 
   return (
@@ -33,30 +32,39 @@ export default function GenericInput(props) {
             </label>
           )}
 
-          <input
+          <textarea
             id={props.label}
-            className="relative bg-midnightBlue border-sunnyOrange border-2 rounded-lg text-myWhite focus:outline-none cursor-pointer h-[51px] px-[16px] w-full  "
+            className="relative bg-midnightBlue border-sunnyOrange border-2 rounded-lg text-myWhite focus:outline-none cursor-pointer  p-[16px] w-full  "
             value={inputValue}
             onChange={handleInputChange}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
+            rows={5}
+            minLength="3"
+            maxLength="140"
             type={props.type}
             {...props.extra}
-          ></input>
+          ></textarea>
         </div>
-        <p className="text-myWhite font-sans font-medium text-[14px] px-[16px] py-1">
-          {props.helpText}
-        </p>
-        {props.empty === props.validation && (
+        <div className="flex w-full justify-between pr-[16px]">
+          <p className="text-myWhite font-sans font-medium text-[14px] px-[16px] py-1 w-fit">
+            Optional - Describe your item
+          </p>
+          <div className="w-fit">{inputValue.length}/140</div>
+        </div>
+
+        {props.empty === "email" && (
           <p className="text-sunnyOrange font-sans font-medium text-[14px] px-[16px] py-1">
-            {props.error}
+            {
+              'Please enter a valid email address in the format "example@stud.noroff.no."'
+            }
           </p>
         )}
-        {/* {props.hasError && (
+        {props.hasError && (
           <p className="text-sunnyOrange font-sans font-medium text-[14px] px-[16px] py-1">
-            {props.error}
+            This field cannot be empty.
           </p>
-        )} */}
+        )}
       </div>
     </div>
   );

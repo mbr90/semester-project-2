@@ -38,7 +38,8 @@ export default function AuctionMessage() {
           }
         >
           <h1 className=" text-myWhite font-serif text-[27px] flex">
-            <Greeting />, {getName()}
+            <Greeting />,{" "}
+            {getName().charAt(0).toUpperCase() + getName().slice(1)}
           </h1>
           <h2 className="font-sans text-myWhite  text-[18px] mt-6 mb-10  w-fit ">
             {

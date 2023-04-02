@@ -183,7 +183,7 @@ export default function Header() {
                   Auction
                 </li>{" "}
               </Link>
-              <Link href="/" className="flex">
+              <Link href="/listing" className="flex">
                 <li className={burgerItem}>
                   {" "}
                   <MdEditSquare className={burgerIcon} />

@@ -25,7 +25,7 @@ import { useRouter } from "next/router";
 export default function AuctionItem({ data, id, errorMessage }) {
   const router = useRouter();
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isModal2Open, setModal2Open] = useState(true);
+  const [isModal2Open, setModal2Open] = useState(false);
   const [bid, setBid] = useState("");
   const [bidValid, setBidValid] = useState(false);
   const [emptyField, setEmptyField] = useState("");
@@ -117,7 +117,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                 <img
                   src={defaultImage}
                   alt="Default Image"
-                  className="slide object-cover h-96 w-full"
+                  className="slide object-cover h-96 w-full cursor-pointer"
                   onClick={() => setModalOpen(true)}
                 />
               ) : (
@@ -135,11 +135,19 @@ export default function AuctionItem({ data, id, errorMessage }) {
                     style={{ overflowY: "auto" }}
                   >
                     <div className="w-fit h-fit mx-auto mt-40">
-                      <img
-                        src={data.media[currentSlide]}
-                        alt={data.title}
-                        className=" object-contain max-h-[800px] max-w-full md:max-w-[800px] min-w-[300px] min-h-[auto]"
-                      />
+                      {!data?.media || data?.media?.length === 0 ? (
+                        <img
+                          src={defaultImage}
+                          alt="Default Image"
+                          className="slide object-cover h-96 w-full"
+                        />
+                      ) : (
+                        <img
+                          src={data.media[currentSlide]}
+                          alt={`Slide ${currentSlide + 1}`}
+                          className="slide object-cover h-96 w-full cursor-pointer"
+                        />
+                      )}
                     </div>
                     <div className="flex justify-center mt-mobMargin">
                       <Button
@@ -236,10 +244,10 @@ export default function AuctionItem({ data, id, errorMessage }) {
                       <h1 className="font-serif text-center text-[27px]">
                         Thank you for your bid!
                       </h1>
-                      <p className="font-sans text-center pt-mobMargin">
+                      {/* <p className="font-sans text-center pt-mobMargin">
                         <span className={liKey}>Your new credit balance:</span>
                         {user.credits} Credits
-                      </p>
+                      </p> */}
                       <p className="max-w-[300px] font-sans text-center mx-auto pt-2">
                         You can monitor the progress of this listing on your
                         profile under My Bids & Listings{" "}
