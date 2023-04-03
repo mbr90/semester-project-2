@@ -1,15 +1,24 @@
 import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import Button from "../Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import IsLoggedIn from "../tools/IsLoggedIn";
 import { getName } from "../tools/Utils";
 import Greeting from "../tools/Greeting";
+import Username from "../tools/Username";
 
 const optionStyling = "bg-myWhite font-semibold font-button";
 
-export default function AuctionMessage() {
+export default function AuctionMessage({ onInputChange }) {
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [sortValue, setSortValue] = useState("");
+
+  useEffect(() => {
+    if (onInputChange) {
+      onInputChange(searchValue, sortValue);
+    }
+  }, [searchValue, sortValue, onInputChange]);
 
   return (
     <section className="p-mobMargin">
@@ -39,7 +48,7 @@ export default function AuctionMessage() {
         >
           <h1 className=" text-myWhite font-serif text-[27px] flex">
             <Greeting />,{" "}
-            {getName().charAt(0).toUpperCase() + getName().slice(1)}
+            {Username()?.charAt(0).toUpperCase() + Username()?.slice(1)}
           </h1>
           <h2 className="font-sans text-myWhite  text-[18px] mt-6 mb-10  w-fit ">
             {
@@ -56,10 +65,12 @@ export default function AuctionMessage() {
               </div>
             )}
             <input
-              className="ml-1 h-[51px] w-full rounded-r-lg pl-2 focus:outline-sunnyOrange "
+              className="ml-1 h-[51px] w-full rounded-r-lg px-2 focus:outline-sunnyOrange "
               type="search"
               id="auction-search"
               placeholder="Find Listings..."
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
               onFocus={() => setIsInputFocused(true)}
               onBlur={() => setIsInputFocused(false)}
             ></input>
@@ -68,6 +79,8 @@ export default function AuctionMessage() {
           <select
             className="ml-6 px-[16px] bg-sunnyOrange rounded-lg  text-xl font-semibold font-button h-[51px] drop-shadow-button "
             name="sortBy"
+            value={sortValue}
+            onChange={(e) => setSortValue(e.target.value)}
           >
             <option className={optionStyling}>Sort By </option>
             <option className={optionStyling}>Newest</option>

@@ -11,7 +11,7 @@ export default function Listing() {
         <title>New Listing</title>
         <meta name="description" content="This is where you sell your stuff" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/icon.png" />
       </Head>
       <Header />
       <Return />

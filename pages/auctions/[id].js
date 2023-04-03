@@ -21,6 +21,7 @@ import Username from "@/components/tools/Username";
 import BidOnAuction from "@/components/api/post/BidOnAuction";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import IsLoggedIn from "@/components/tools/IsLoggedIn";
 
 export default function AuctionItem({ data, id, errorMessage }) {
   const router = useRouter();
@@ -105,7 +106,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
         <title>ItemName</title>
         <meta name="description" content="Detailed view of Item" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/icon.png" />
       </Head>
       <Header />
       <Return />
@@ -224,7 +225,15 @@ export default function AuctionItem({ data, id, errorMessage }) {
                   </li>
                 </ul>
                 <div className="w-fit mx-auto my-mobMargin h-[53px]">
-                  <Button content="BID NOW" handler={handler} />
+                  <IsLoggedIn
+                    fallback={
+                      <Link href="/login">
+                        <Button content="SIGN IN TO BID" />
+                      </Link>
+                    }
+                  >
+                    <Button content="BID NOW" handler={handler} />
+                  </IsLoggedIn>
                 </div>
               </form>
               <div className="text-sunnyOrange font-button text-[20px] w-fit mx-auto">

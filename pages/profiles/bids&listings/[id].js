@@ -3,7 +3,7 @@ import Header from "@/components/content/Header";
 import Footer from "@/components/content/Footer";
 import Return from "@/components/Return";
 import Link from "next/link";
-import BidsAndListings from "@/components/BidsAndListings";
+import BidsAndListings from "@/components/content/BidsAndListings";
 
 import Username from "@/components/tools/Username";
 
@@ -17,7 +17,7 @@ export default function BidsNListings() {
         </title>
         <meta name="description" content="View your bid's and listings" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/icon.png" />
       </Head>
       <Header />
       <main className="flex-col min-h-screen bg-plumWine">

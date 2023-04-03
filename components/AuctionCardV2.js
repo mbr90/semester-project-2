@@ -49,7 +49,10 @@ export default function AuctionCardReusable(props) {
 
       const height = descriptionRef.current.getBoundingClientRect().height;
       const numLines = height / lineHeight;
-      const lastLineText = description.split("\n")[numLines - 1];
+      const lastLineText = description
+        ? description.split("\n")[numLines - 1]
+        : "";
+
       const lastLineWidth = measureTextWidth(lastLineText, fontStyle);
 
       setIsTruncated(numLines >= 3 && lastLineWidth >= containerWidth * 0.9);
