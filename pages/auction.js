@@ -5,7 +5,8 @@ import AuctionMessage from "@/components/content/AuctionMessage";
 import AuctionVardV2 from "@/components/AuctionCardV2";
 // import DataFetch from "@/components/api/fetch/DataFetch";
 // import LoadingSpinner from "@/components/tools/LoadingSpinner";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import Button from "@/components/Button";
 
 const AuctionURL = "https://api.noroff.dev/api/v1/auction/listings?";
 
@@ -24,14 +25,12 @@ const SortFlag = "&sort=";
 const SortOrderFlag = "&sortOrder=";
 
 export default function Auction() {
-  const [offsetCounter, setOffsetCounter] = useState(0);
-
+  const [offset, setOffset] = useState(0);
   const [searchValue, setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState("");
-
   const [data, setAuctionData] = useState([]);
-
   const [error, setError] = useState(null);
+  const scrollToTopRef = useRef(null);
 
   function handleInputChange(searchValue, sortValue) {
     setSearchValue(searchValue);
@@ -113,7 +112,18 @@ export default function Auction() {
         LimitFlag;
   }
 
-  const fullAuctionURL = AuctionURL + sortQuery;
+  function handlePrevPage() {
+    if (offset > 0) {
+      setOffset(offset - 30);
+    }
+  }
+
+  function handleNextPage() {
+    setOffset(offset + 30);
+    scrollToTopRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
+  const fullAuctionURL = AuctionURL + sortQuery + OffsetFlag + offset;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -165,7 +175,9 @@ export default function Auction() {
         <link rel="icon" href="/icons/icon.png" />
       </Head>
       <Header />
-      <AuctionMessage onInputChange={handleInputChange} />
+      <div ref={scrollToTopRef}>
+        <AuctionMessage onInputChange={handleInputChange} />
+      </div>
 
       <main className="min-h-screen w-full bg-[url('../public/texture/60-lines.png')] bg-plumWine flex-col py-10 text-white">
         <div className="flex-col w-full">
@@ -205,6 +217,14 @@ export default function Auction() {
                 />
               );
             })}
+        </div>
+        <div className="max-w-[577px] w-full flex justify-between mx-auto h-[53px] px-mobMargin">
+          {offset > 0 && (
+            <Button content="Prev" handler={handlePrevPage}></Button>
+          )}
+          <div className="w-fit ml-auto mr-0">
+            <Button content="Next" handler={handleNextPage}></Button>
+          </div>
         </div>
       </main>
       <Footer />

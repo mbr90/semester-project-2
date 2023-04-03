@@ -42,11 +42,13 @@ export default function LoginEmail(props) {
           ></input>
         </div>
 
+        <p className="font-sans text-myWhite font-medium text-[14px] px-[16px] py-1">
+          {props.help}
+        </p>
+
         {props.empty === "email" && (
           <p className="text-sunnyOrange font-sans font-medium text-[14px] px-[16px] py-1">
-            {
-              'Please enter a valid email address in the format "example@stud.noroff.no."'
-            }
+            {"Please enter a valid email address"}
           </p>
         )}
       </div>

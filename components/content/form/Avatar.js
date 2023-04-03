@@ -43,7 +43,7 @@ export default function Avatar(props) {
         </div>
         {props.empty === "avatar" && (
           <p className="text-sunnyOrange font-sans font-medium text-[14px] px-[16px] py-1">
-            {`Avatar is optional, but needs to be a valid url for instance: "https://img.service.com/avatar.jpg"`}
+            {`Avatar is optional, but needs to be a valid url, for instance: "https://img.service.com/avatar.jpg"`}
           </p>
         )}
       </div>

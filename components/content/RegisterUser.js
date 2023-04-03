@@ -142,6 +142,7 @@ export default function RegisterUser() {
           <div className="py-4">
             <LoginEmail
               onInputChange={emailValue}
+              help='Email address needs to be in the format "example@stud.noroff.no."'
               empty={
                 (emptyField === "email" || emptyField === "emailAndPassword") &&
                 !emailValid
@@ -155,6 +156,7 @@ export default function RegisterUser() {
             <LoginPassword
               label="Password*"
               onInputChange={passwordValue}
+              help="Password needs to be at least 8 characters."
               empty={
                 (emptyField === "password" ||
                   emptyField === "emailAndPassword") &&
