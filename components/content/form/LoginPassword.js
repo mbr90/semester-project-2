@@ -57,12 +57,15 @@ export default function LoginPassword(props) {
             {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
-        <p className="font-sans text-myWhite font-medium text-[14px] px-[16px] py-1">
-          {props.help}
-        </p>
+
+        {props.empty === "" && (
+          <p className="font-sans text-myWhite font-medium text-[14px] px-[16px] py-1">
+            {props.help}
+          </p>
+        )}
         {props.empty === "password" && (
           <p className="text-sunnyOrange font-sans font-medium text-[14px] px-[16px] py-1">
-            Password is required.
+            Password is required. Needs to be at least 8 characters!
           </p>
         )}
       </div>

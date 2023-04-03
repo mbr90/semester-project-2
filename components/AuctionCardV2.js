@@ -27,14 +27,6 @@ export default function AuctionCardReusable(props) {
     setIsClicked(!isClicked);
   };
 
-  const measureTextWidth = (text, fontStyle) => {
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    context.font = fontStyle;
-    const metrics = context.measureText(text);
-    return metrics.width;
-  };
-
   useEffect(() => {
     if (descriptionRef.current) {
       const lineHeight = parseInt(
@@ -42,20 +34,22 @@ export default function AuctionCardReusable(props) {
           .getComputedStyle(descriptionRef.current)
           .getPropertyValue("line-height")
       );
-      const containerWidth = descriptionRef.current.clientWidth;
-      const fontStyle = window
-        .getComputedStyle(descriptionRef.current)
-        .getPropertyValue("font");
+      const containerHeight = descriptionRef.current.clientHeight;
+      const scrollHeight = descriptionRef.current.scrollHeight;
 
-      const height = descriptionRef.current.getBoundingClientRect().height;
-      const numLines = height / lineHeight;
-      const lastLineText = description
-        ? description.split("\n")[numLines - 1]
-        : "";
+      const screenWidth = window.innerWidth;
+      let linesThreshold;
+      if (screenWidth <= 480) {
+        linesThreshold = 2;
+      } else {
+        linesThreshold = 3;
+      }
 
-      const lastLineWidth = measureTextWidth(lastLineText, fontStyle);
+      const truncatedHeight = lineHeight * linesThreshold;
 
-      setIsTruncated(numLines >= 3 && lastLineWidth >= containerWidth * 0.9);
+      setIsTruncated(
+        scrollHeight > containerHeight && scrollHeight > truncatedHeight
+      );
     }
   }, [description]);
 

@@ -13,7 +13,7 @@ import LoadingSpinner from "../tools/LoadingSpinner";
 export default function NewListing() {
   const [fields, setFields] = useState([{ label: "Item image URL*" }]);
   const [fieldCounter, setFieldCounter] = useState(1);
-  const [inputFieldValues, setInputFieldValues] = useState([]);
+  const [inputFieldValues, setInputFieldValues] = useState([""]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [time, setTime] = useState("");
