@@ -20,95 +20,199 @@ export default function BidsAndListings() {
   return (
     <>
       <ClientOnly>
-        <Accordion title="My Listings">
-          {myListings &&
-            myListings.map((listing, index) => {
-              const bids = listing.bids;
-              const highestBidAmount = bids
-                ? bids.reduce((accumulator, current) => {
-                    return current.amount > accumulator
-                      ? current.amount
-                      : accumulator;
-                  }, 0)
-                : null;
-              return (
-                <section
-                  key={index}
-                  className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] min-[578px]:rounded-lg mx-auto my-10 flex-col overflow-hidden"
-                >
-                  <img
-                    src={listing.media}
-                    alt={listing.title}
-                    className="w-full h-[348px] my-auto object-cover shadow-lg "
-                  />
-                  <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
-                    <div className="w-11/12">
-                      <h1 className="font-serif text-[27px]">
-                        {listing.title}
-                      </h1>
-                      <p>{listing.description}</p>
+        <div className="xl:hidden">
+          <Accordion title="My Listings">
+            {myListings &&
+              myListings.map((listing, index) => {
+                const bids = listing.bids;
+                const highestBidAmount = bids
+                  ? bids.reduce((accumulator, current) => {
+                      return current.amount > accumulator
+                        ? current.amount
+                        : accumulator;
+                    }, 0)
+                  : null;
+                return (
+                  <section
+                    key={index}
+                    className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] min-[578px]:rounded-lg mx-auto my-10 flex-col overflow-hidden"
+                  >
+                    <img
+                      src={listing.media}
+                      alt={listing.title}
+                      className="w-full h-[348px] my-auto object-cover shadow-lg "
+                    />
+                    <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
+                      <div className="w-11/12">
+                        <h1 className="font-serif text-[27px]">
+                          {listing.title}
+                        </h1>
+                        <p>{listing.description}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
-                    <div className="flex-col text-myWhite font-sans mr-4">
-                      <p className="mb-3">
-                        <span className="font-bold">Highest Bid: </span>
-                        {highestBidAmount}
-                      </p>
-                      <p>
-                        <span className="font-bold">Ends:</span>{" "}
-                        <FormatDate date={listing.endsAt} />
-                      </p>
+                    <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
+                      <div className="flex-col text-myWhite font-sans mr-4">
+                        <p className="mb-3">
+                          <span className="font-bold">Highest Bid: </span>
+                          {highestBidAmount}
+                        </p>
+                        <p>
+                          <span className="font-bold">Ends:</span>{" "}
+                          <FormatDate date={listing.endsAt} />
+                        </p>
+                      </div>
+                      <Link href={`/auctions/${listing.id}`}>
+                        <Button content="VIEW ITEM" />
+                      </Link>
                     </div>
-                    <Link href={`/auctions/${listing.id}`}>
-                      <Button content="VIEW ITEM" />
-                    </Link>
-                  </div>
-                </section>
-              );
-            })}
-        </Accordion>
-        <Accordion title="My Bids">
-          {myBids &&
-            myBids.map((item, index) => {
-              return (
-                <section
-                  key={index}
-                  className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] min-[578px]:rounded-lg mx-auto my-10 flex-col overflow-hidden"
-                >
-                  <img
-                    src={item.listing.media}
-                    alt={item.listing.title}
-                    className="w-full h-[348px] my-auto object-cover shadow-lg "
-                  />
+                  </section>
+                );
+              })}
+          </Accordion>
+        </div>
+        <div className="xl:hidden">
+          <Accordion title="My Bids">
+            {myBids &&
+              myBids.map((item, index) => {
+                return (
+                  <section
+                    key={index}
+                    className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] min-[578px]:rounded-lg mx-auto my-10 flex-col overflow-hidden"
+                  >
+                    <img
+                      src={item.listing.media}
+                      alt={item.listing.title}
+                      className="w-full h-[348px] my-auto object-cover shadow-lg "
+                    />
 
-                  <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
-                    <div className="w-11/12">
-                      <h1 className="font-serif text-[27px]">
-                        {item.listing.title}
-                      </h1>
-                      <p>{item.listing.description}</p>
+                    <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
+                      <div className="w-11/12">
+                        <h1 className="font-serif text-[27px]">
+                          {item.listing.title}
+                        </h1>
+                        <p>{item.listing.description}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
-                    <div className="flex-col text-myWhite font-sans mr-4">
-                      <p className="mb-3">
-                        <span className="font-bold">My bid: </span>
-                        {item.amount}
-                      </p>
-                      <p>
-                        <span className="font-bold">Ends:</span>{" "}
-                        <FormatDate date={item.listing.endsAt} />
-                      </p>
+                    <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
+                      <div className="flex-col text-myWhite font-sans mr-4">
+                        <p className="mb-3">
+                          <span className="font-bold">My bid: </span>
+                          {item.amount}
+                        </p>
+                        <p>
+                          <span className="font-bold">Ends:</span>{" "}
+                          <FormatDate date={item.listing.endsAt} />
+                        </p>
+                      </div>
+                      <Link href={`/auctions/${item.listing.id}`}>
+                        <Button content="VIEW ITEM" />
+                      </Link>
                     </div>
-                    <Link href={`/auctions/${item.listing.id}`}>
-                      <Button content="VIEW ITEM" />
-                    </Link>
-                  </div>
-                </section>
-              );
-            })}
-        </Accordion>
+                  </section>
+                );
+              })}
+          </Accordion>
+        </div>
+        <div className="w-full px-[100px] max-w-[1920px] mx-auto">
+          <section className="invisible xl:visible w-full flex-col  pt-[50px] max-w-[1950px] mx-auto">
+            <h1 className="font-serif text-[20px] text-myWhite">My Listings</h1>
+            <div className="w-full flex flex-wrap justify-center gap-x-[86px]  ">
+              {myListings &&
+                myListings.map((listing, index) => {
+                  const bids = listing.bids;
+                  const highestBidAmount = bids
+                    ? bids.reduce((accumulator, current) => {
+                        return current.amount > accumulator
+                          ? current.amount
+                          : accumulator;
+                      }, 0)
+                    : null;
+                  return (
+                    <section
+                      key={index}
+                      className=" min-h-[717px]  bg-midnightBlue w-[510px]  min-[578px]:rounded-lg  my-10 flex-col overflow-hidden"
+                    >
+                      <img
+                        src={listing.media}
+                        alt={listing.title}
+                        className="w-full h-[348px] my-auto object-cover shadow-lg "
+                      />
+                      <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
+                        <div className="w-11/12">
+                          <h1 className="font-serif text-[27px]">
+                            {listing.title}
+                          </h1>
+                          <p>{listing.description}</p>
+                        </div>
+                      </div>
+                      <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
+                        <div className="flex-col text-myWhite font-sans mr-4">
+                          <p className="mb-3">
+                            <span className="font-bold">Highest Bid: </span>
+                            {highestBidAmount}
+                          </p>
+                          <p>
+                            <span className="font-bold">Ends:</span>{" "}
+                            <FormatDate date={listing.endsAt} />
+                          </p>
+                        </div>
+                        <Link href={`/auctions/${listing.id}`}>
+                          <Button content="VIEW ITEM" />
+                        </Link>
+                      </div>
+                    </section>
+                  );
+                })}
+            </div>
+          </section>
+          <div className="invisible xl:visible w-full  my-16">
+            <div className="h-[4px] bg-myWhite w-full max-w-[1920px]  mx-auto rounded-xl"></div>
+          </div>
+          <section className="invisible  xl:visible w-full flex-col  max-w-[1950px] py-[50px] mx-auto">
+            <h1 className="font-serif text-[20px] text-myWhite">My Bids</h1>
+            <div className="w-full flex flex-wrap justify-center gap-x-[86px]  ">
+              {myBids &&
+                myBids.map((item, index) => {
+                  return (
+                    <section
+                      key={index}
+                      className="  min-h-[717px]  bg-midnightBlue w-[510px] min-[578px]:rounded-lg my-10 flex-col overflow-hidden"
+                    >
+                      <img
+                        src={item.listing.media}
+                        alt={item.listing.title}
+                        className="w-full h-[348px] my-auto object-cover shadow-lg "
+                      />
+
+                      <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
+                        <div className="w-11/12">
+                          <h1 className="font-serif text-[27px]">
+                            {item.listing.title}
+                          </h1>
+                          <p>{item.listing.description}</p>
+                        </div>
+                      </div>
+                      <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
+                        <div className="flex-col text-myWhite font-sans mr-4">
+                          <p className="mb-3">
+                            <span className="font-bold">My bid: </span>
+                            {item.amount}
+                          </p>
+                          <p>
+                            <span className="font-bold">Ends:</span>{" "}
+                            <FormatDate date={item.listing.endsAt} />
+                          </p>
+                        </div>
+                        <Link href={`/auctions/${item.listing.id}`}>
+                          <Button content="VIEW ITEM" />
+                        </Link>
+                      </div>
+                    </section>
+                  );
+                })}
+            </div>
+          </section>
+        </div>
       </ClientOnly>
     </>
   );

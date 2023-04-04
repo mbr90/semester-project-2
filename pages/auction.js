@@ -49,6 +49,7 @@ export default function Auction() {
         SortOrderFlag +
         "asc" +
         LimitFlag;
+
       break;
     case "Newest":
       sortQuery =
@@ -60,6 +61,7 @@ export default function Auction() {
         SortOrderFlag +
         "desc" +
         LimitFlag;
+
       break;
     case "Oldest":
       sortQuery =
@@ -71,6 +73,7 @@ export default function Auction() {
         SortOrderFlag +
         "asc" +
         LimitFlag;
+
       break;
     case "High Bid":
       sortQuery = BidFlag + SellerFlag + ActiveFlag;
@@ -88,6 +91,7 @@ export default function Auction() {
         SortOrderFlag +
         "asc" +
         LimitFlag;
+      setOffset(0);
       break;
     case "Title Z-A":
       sortQuery =
@@ -99,6 +103,7 @@ export default function Auction() {
         SortOrderFlag +
         "desc" +
         LimitFlag;
+      setOffset(0);
       break;
     default:
       sortQuery =
@@ -179,51 +184,56 @@ export default function Auction() {
         <AuctionMessage onInputChange={handleInputChange} />
       </div>
 
-      <main className="min-h-screen w-full bg-[url('../public/texture/60-lines.png')] bg-plumWine flex-col py-10 text-white">
-        <div className="flex-col w-full">
-          {sortedData
-            .filter((item) => {
-              return (
-                searchValue === "" ||
-                item?.title
-                  ?.toLowerCase()
-                  ?.includes(searchValue.toLowerCase()) ||
-                item?.description
-                  ?.toLowerCase()
-                  ?.includes(searchValue.toLowerCase())
-              );
-            })
-            .map((item) => {
-              const bids = item?.bids || [];
-              const highestBidAmount = bids?.reduce((accumulator, current) => {
-                if (current.amount > accumulator) {
-                  accumulator = current.amount;
-                }
-                return accumulator;
-              }, 0);
+      <main className="min-h-screen w-full bg-[url('../public/texture/60-lines.png')] bg-plumWine flex-col py-10 text-white xl:px-[100px]">
+        <div className="w-full max-w-[1920px] mx-auto">
+          <div className="flex-col w-full xl:flex xl:flex-row flex-wrap justify-center gap-x-[86px]">
+            {sortedData
+              .filter((item) => {
+                return (
+                  searchValue === "" ||
+                  item?.title
+                    ?.toLowerCase()
+                    ?.includes(searchValue.toLowerCase()) ||
+                  item?.description
+                    ?.toLowerCase()
+                    ?.includes(searchValue.toLowerCase())
+                );
+              })
+              .map((item) => {
+                const bids = item?.bids || [];
+                const highestBidAmount = bids?.reduce(
+                  (accumulator, current) => {
+                    if (current.amount > accumulator) {
+                      accumulator = current.amount;
+                    }
+                    return accumulator;
+                  },
+                  0
+                );
 
-              return (
-                <AuctionVardV2
-                  key={item.id}
-                  item={item}
-                  title={item.title}
-                  description={item.description}
-                  image={item.media}
-                  bidders={item._count.bids}
-                  bid={highestBidAmount}
-                  ends={item.endsAt}
-                  seller={item.seller.name}
-                  id={item.id}
-                />
-              );
-            })}
-        </div>
-        <div className="max-w-[577px] w-full flex justify-between mx-auto h-[53px] px-mobMargin">
-          {offset > 0 && (
-            <Button content="Prev" handler={handlePrevPage}></Button>
-          )}
-          <div className="w-fit ml-auto mr-0">
-            <Button content="Next" handler={handleNextPage}></Button>
+                return (
+                  <AuctionVardV2
+                    key={item.id}
+                    item={item}
+                    title={item.title}
+                    description={item.description}
+                    image={item.media}
+                    bidders={item._count.bids}
+                    bid={highestBidAmount}
+                    ends={item.endsAt}
+                    seller={item.seller.name}
+                    id={item.id}
+                  />
+                );
+              })}
+          </div>
+          <div className="max-w-[577px] xl:max-w-[1720px] w-full flex justify-between mx-auto h-[53px] px-mobMargin">
+            {offset > 0 && (
+              <Button content="Prev" handler={handlePrevPage}></Button>
+            )}
+            <div className="w-fit ml-auto mr-0">
+              <Button content="Next" handler={handleNextPage}></Button>
+            </div>
           </div>
         </div>
       </main>

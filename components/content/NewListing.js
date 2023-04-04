@@ -137,113 +137,117 @@ export default function NewListing() {
   };
 
   return (
-    <div className="bg-midnightBlue w-full text-myWhite mb-40">
-      <Image
-        className="w-[370px] h-auto my-auto mx-auto py-mobMargin"
-        src={logo}
-        alt="SaleChampz logo"
-      />
-      <h1 className="font-serif text-[27px] w-fit mx-auto">New Listing</h1>
-      <form className="p-mobMargin">
-        <div className="my-mobMargin">
-          <GenericInput
-            onInputChange={titleValue}
-            label="Title*"
-            helpText="*Required - What are you selling?"
-            hasError={titleError}
-            error={titleError}
-          />
-        </div>
-        <div className="my-mobMargin">
-          <TextArea
-            label="Description"
-            onInputChange={descriptionValue}
-            hasError={descriptionError}
-          />
-        </div>
-        <div className="my-mobMargin">
-          <PickDate
-            label="Bids ends at*"
-            onInputChange={timeValue}
-            hasError={timeError}
-          />
-        </div>
-        <div className="my-mobMargin flex flex-col mx-auto max-w-[600px]">
-          {fields.map((field, index) => (
-            <div className="my-1 " key={index}>
-              <div className="flex relative w-full">
-                <GenericInput
-                  label={field.label}
-                  onInputChange={(value) => updateInputFieldValue(index, value)}
-                  hasError={inputFieldErrors[index]}
-                  error={inputFieldErrors[index]}
-                  helpText={index === 0 ? "*Required - Upload URL" : ""}
-                />
-                {index > 0 && (
-                  <MdRemove
-                    className="w-[38px] h-[38px] cursor-pointer hover:w-[40px] hover:h-[40px] absolute -right-2 top-[12%]"
-                    onClick={() => handleRemoveField(field.id)}
+    <div className="w-full xl:px-[100px]">
+      <div className="bg-midnightBlue w-full text-myWhite mb-40 max-w-[1720px] mx-auto">
+        <Image
+          className="w-[370px] h-auto my-auto mx-auto py-mobMargin"
+          src={logo}
+          alt="SaleChampz logo"
+        />
+        <h1 className="font-serif text-[27px] w-fit mx-auto">New Listing</h1>
+        <form className="p-mobMargin">
+          <div className="my-mobMargin">
+            <GenericInput
+              onInputChange={titleValue}
+              label="Title*"
+              helpText="*Required - What are you selling?"
+              hasError={titleError}
+              error={titleError}
+            />
+          </div>
+          <div className="my-mobMargin">
+            <TextArea
+              label="Description"
+              onInputChange={descriptionValue}
+              hasError={descriptionError}
+            />
+          </div>
+          <div className="my-mobMargin">
+            <PickDate
+              label="Bids ends at*"
+              onInputChange={timeValue}
+              hasError={timeError}
+            />
+          </div>
+          <div className="my-mobMargin flex flex-col mx-auto max-w-[600px]">
+            {fields.map((field, index) => (
+              <div className="my-1 " key={index}>
+                <div className="flex relative w-full">
+                  <GenericInput
+                    label={field.label}
+                    onInputChange={(value) =>
+                      updateInputFieldValue(index, value)
+                    }
+                    hasError={inputFieldErrors[index]}
+                    error={inputFieldErrors[index]}
+                    helpText={index === 0 ? "*Required - Upload URL" : ""}
                   />
-                )}
+                  {index > 0 && (
+                    <MdRemove
+                      className="w-[38px] h-[38px] cursor-pointer hover:w-[40px] hover:h-[40px] absolute -right-2 top-[12%]"
+                      onClick={() => handleRemoveField(field.id)}
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
+            <div
+              onClick={handleAddField}
+              className=" flex h-[40px] cursor-pointer group  mx-auto"
+            >
+              {fields.length < 3 && (
+                <>
+                  <MdAdd className="w-[38px] h-[38px]  group-hover:w-[40px] hover:h-[40px]" />
+                  <p className="ml-2 my-auto group-hover:font-bold group-hover:ml-1">
+                    Add more item images
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+          {isLoading && (
+            <div className="w-fit mx-auto">
+              <LoadingSpinner />
+            </div>
+          )}
+          <div className="w-fit mx-auto my-mobMargin h-[53px]">
+            <Button content="LIST ITEM" handler={handler} />
+          </div>
+          <div className="text-sunnyOrange font-button text-[20px] w-fit mx-auto">
+            {apiError}
+          </div>
+        </form>
+        {isModalOpen && (
+          <div className="fixed inset-0 h-full z-50  bg-midnightBlue bg-opacity-90">
+            <div
+              onClick={closeModal}
+              className=" absolute top-1 right-5 lex justify-center mt-mobMargin cursor-pointer h-[40px] text-myWhite"
+            >
+              <MdClose className="h-[34px] w-[34px] hover:w-[40px] hover:h-[40px] my-auto" />
+            </div>
+            <div className="w-full h-full relative">
+              <div className="flex-col justify-center align-middle w-full p-mobMargin mx-auto mt-40 text-myWhite">
+                <h1 className="font-serif text-center text-[27px]">
+                  Your item has been listed!
+                </h1>
+                <p className="max-w-[300px] font-sans text-center mx-auto pt-2">
+                  You can monitor the progress of this listing on your profile
+                  under My Bids & Listings.
+                </p>
+                <div className="w-fit mx-auto p-mobMargin flex">
+                  <MdArrowBackIosNew className="h-[24px] w-[24px] my-auto" />
+
+                  <Link href="/auction">
+                    <p className="font-button hover:underline text-[20px] pl-[5px]">
+                      Return to Auction
+                    </p>
+                  </Link>
+                </div>
               </div>
             </div>
-          ))}
-          <div
-            onClick={handleAddField}
-            className=" flex h-[40px] cursor-pointer group  mx-auto"
-          >
-            {fields.length < 3 && (
-              <>
-                <MdAdd className="w-[38px] h-[38px]  group-hover:w-[40px] hover:h-[40px]" />
-                <p className="ml-2 my-auto group-hover:font-bold group-hover:ml-1">
-                  Add more item images
-                </p>
-              </>
-            )}
-          </div>
-        </div>
-        {isLoading && (
-          <div className="w-fit mx-auto">
-            <LoadingSpinner />
           </div>
         )}
-        <div className="w-fit mx-auto my-mobMargin h-[53px]">
-          <Button content="LIST ITEM" handler={handler} />
-        </div>
-        <div className="text-sunnyOrange font-button text-[20px] w-fit mx-auto">
-          {apiError}
-        </div>
-      </form>
-      {isModalOpen && (
-        <div className="fixed inset-0 h-full z-50  bg-midnightBlue bg-opacity-90">
-          <div
-            onClick={closeModal}
-            className=" absolute top-1 right-5 lex justify-center mt-mobMargin cursor-pointer h-[40px] text-myWhite"
-          >
-            <MdClose className="h-[34px] w-[34px] hover:w-[40px] hover:h-[40px] my-auto" />
-          </div>
-          <div className="w-full h-full relative">
-            <div className="flex-col justify-center align-middle w-full p-mobMargin mx-auto mt-40 text-myWhite">
-              <h1 className="font-serif text-center text-[27px]">
-                Your item has been listed!
-              </h1>
-              <p className="max-w-[300px] font-sans text-center mx-auto pt-2">
-                You can monitor the progress of this listing on your profile
-                under My Bids & Listings.
-              </p>
-              <div className="w-fit mx-auto p-mobMargin flex">
-                <MdArrowBackIosNew className="h-[24px] w-[24px] my-auto" />
-
-                <Link href="/auction">
-                  <p className="font-button hover:underline text-[20px] pl-[5px]">
-                    Return to Auction
-                  </p>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

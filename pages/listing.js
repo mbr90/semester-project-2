@@ -15,7 +15,7 @@ export default function Listing() {
       </Head>
       <Header />
       <Return />
-      <main className="flex-col min-h-screen bg-plumWine">
+      <main className="flex-col w-full min-h-screen bg-burgundyVelvet">
         <NewListing />
       </main>
       <Footer />

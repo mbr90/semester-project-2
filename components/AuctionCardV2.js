@@ -57,7 +57,7 @@ export default function AuctionCardReusable(props) {
   const textMaximized = "line-clamp font-sans text-[18px]     ";
 
   return (
-    <section className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] min-[578px]:rounded-lg mx-auto my-10 flex-col overflow-hidden">
+    <section className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] xl:w-[510px] min-[578px]:rounded-lg mx-auto xl:mx-0 my-10 flex-col overflow-hidden">
       <Link href={`/auctions/${id}`}>
         {!image || image.length === 0 ? (
           <img

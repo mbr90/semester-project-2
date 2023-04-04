@@ -23,7 +23,7 @@ export default function BidsNListings() {
       <main className="flex-col min-h-screen bg-plumWine">
         <Return />
         <div className="flex w-full p-mobMargin">
-          <div className="flex my-mobMargin w-full ">
+          <div className="flex my-mobMargin w-full max-w-[1920px] mx-auto xl:px-[100px] ">
             <Link href={`/profiles/${Username()}`} className="flex">
               <h1 className="text-whyte  font-button text-[20px] px-[16px] py-2   ">
                 My Account

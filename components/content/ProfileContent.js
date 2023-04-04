@@ -135,73 +135,90 @@ export default function ProfileContent() {
   };
 
   return (
-    <>
-      <div className="w-full pb-40">
-        <h1 className="text-[27px] text-myWhite font-serif text-center my-mobMargin px-mobMargin">
+    <div className="relative max-w-[1720px] mx-auto">
+      <h1 className="text-[27px] text-myWhite font-serif text-center my-mobMargin px-mobMargin invisible xl:visible absolute -top-[235px] right-0">
+        {randomGreeting} {name}
+      </h1>
+      <div className="w-full pb-40 max-w-[1920px] xl:flex xl:mt-28">
+        <h1 className="text-[27px] text-myWhite font-serif text-center my-mobMargin px-mobMargin xl:hidden">
           {randomGreeting} {name}
         </h1>
-        <img
-          src={avatarUrl}
-          alt="Profile Picture"
-          className="rounded-full h-[300px] w-[300px] mx-auto border-4 border-sunnyOrange"
-        ></img>{" "}
-        <div className="mx-auto w-fit my-mobMargin h-[53px]">
-          <Button content="CHANGE AVATAR" handler={openModal} />
-        </div>
-        <section className="text-myWhite  mx-mobMargin border-b-2 mb-mobMargin py-mobMargin">
-          <h2 className="font-serif text-[27px]">{name}</h2>
-          <ul className=" flex-col font-sans text-[18px]">
-            <li>
-              <span className={liKey}>Email:</span>
-              {data?.email}
-            </li>
-            <li>
-              <span className={liKey}>Credits:</span> {data?.credits}
-            </li>
-            <li>
-              <span className={liKey}>Auction Wins:</span>
-              {data?.wins?.length}
-            </li>
-            <li>
-              <span className={liKey}>Auction Bids:</span>
-              {userBids?.length}
-            </li>
-            <li>
-              <span className={liKey}>My Listings:</span>
-              {data?._count?.listings}
-            </li>
-          </ul>
-        </section>
-        <Accordion title="Winning History">
-          {" "}
-          <div className="w-full bg-midnightBlue">
-            <table className="table-auto min-w-[300px] max-w-[500px] flex-col  text-myWhite mx-auto">
-              <thead>
-                <tr className="font-sans text-[20px]">
-                  <th className=" px-4 py-2">Item</th>
-                  <th className=" px-4 py-2">Bids</th>
-                  <th className=" px-4 py-2">Bid</th>
-                </tr>
-              </thead>
-              <tbody>
-                {itemDetails.map((item, index) => {
-                  const sortedBids = item.bids.sort(
-                    (a, b) => b.amount - a.amount
-                  );
-                  const highestBid = sortedBids[0]?.amount;
-
-                  return (
-                    <tr className="w-full" key={index}>
-                      <td className="px-4 py-2 flex relative">{item.title}</td>
-                      <td className="px-4 py-2">{item.bids.length}</td>
-                      <td className="px-4 py-2">{highestBid}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+        <div className="xl:flex xl:justify-center xl:w-full relative">
+          <div>
+            <img
+              src={avatarUrl}
+              alt="Profile Picture"
+              className="rounded-full h-[300px] w-[300px] xl:h-[400px] xl:w-[400px] mx-auto border-4 border-sunnyOrange"
+            ></img>{" "}
+            <div className="mx-auto w-fit my-mobMargin h-[53px]">
+              <Button content="CHANGE AVATAR" handler={openModal} />
+            </div>
           </div>
-        </Accordion>
+          <section className="text-myWhite  mx-mobMargin border-b-2 mb-mobMargin py-mobMargin xl:border-none xl:my-auto xl:ml-60">
+            <h2 className="font-serif text-[27px]">{name}</h2>
+
+            <ul className=" flex-col font-sans text-[18px]">
+              <div>
+                <li className="xl:mb-4 mt-8">
+                  <span className={liKey}>Email:</span>
+                  {data?.email}
+                </li>
+                <li>
+                  <span className={liKey}>Credits:</span> {data?.credits}
+                </li>
+              </div>
+
+              <div className="xl:flex xl:gap-x-4 xl:absolute xl:bottom-6 xm:mr-4">
+                <li className=" flex flex-row xl:flex-col">
+                  <div className={liKey}>Auction Wins:</div>
+                  <p className="xl:mx-auto"> {data?.wins?.length}</p>
+                </li>
+                <li className=" flex flex-row xl:flex-col">
+                  <div className={liKey}>Auction Bids:</div>
+                  <p className="xl:mx-auto">{userBids?.length}</p>
+                </li>
+                <li className=" flex flex-row xl:flex-col">
+                  <div className={liKey}>My Listings:</div>
+                  <p className="xl:mx-auto">{data?._count?.listings}</p>
+                </li>
+              </div>
+            </ul>
+          </section>
+        </div>
+        <div className="xl:hidden">
+          <Accordion title="Winning History">
+            {" "}
+            <div className="w-full bg-midnightBlue">
+              <table className="table-auto min-w-[300px] max-w-[500px] flex-col  text-myWhite mx-auto">
+                <thead>
+                  <tr className="font-sans text-[20px]">
+                    <th className=" px-4 py-2">Item</th>
+                    <th className=" px-4 py-2">Bids</th>
+                    <th className=" px-4 py-2">Bid</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {itemDetails.map((item, index) => {
+                    const sortedBids = item.bids.sort(
+                      (a, b) => b.amount - a.amount
+                    );
+                    const highestBid = sortedBids[0]?.amount;
+
+                    return (
+                      <tr className="w-full" key={index}>
+                        <td className="px-4 py-2 flex relative">
+                          {item.title}
+                        </td>
+                        <td className="px-4 py-2">{item.bids.length}</td>
+                        <td className="px-4 py-2">{highestBid}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </Accordion>
+        </div>
         {isModalOpen && (
           <div className="fixed inset-0 h-full z-50  bg-midnightBlue bg-opacity-90">
             <div
@@ -236,7 +253,7 @@ export default function ProfileContent() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

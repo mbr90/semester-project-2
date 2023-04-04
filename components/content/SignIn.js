@@ -80,8 +80,8 @@ export default function SignIn() {
   };
 
   return (
-    <>
-      <div className="w-full bg-midnightBlue flex-col h-full py-mobMargin">
+    <div className="w-full xl:px-[100px]">
+      <div className="w-full bg-midnightBlue flex-col h-full py-mobMargin max-w-[1720px] mx-auto">
         <Image
           className="w-[370px] h-auto my-auto mx-auto py-mobMargin"
           src={logo}
@@ -126,7 +126,7 @@ export default function SignIn() {
           </div>
         )}
       </div>
-      <div className="w-full bg-midnightBlue p-mobMargin mb-20">
+      <div className="w-full bg-midnightBlue p-mobMargin mb-20 max-w-[1720px] mx-auto">
         <div className="flex w-fit mx-auto gap-2">
           <p className="text-whyte text-[14px] my-auto">New to SaleChampz?</p>
           <Link
@@ -137,6 +137,6 @@ export default function SignIn() {
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }
