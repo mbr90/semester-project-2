@@ -33,16 +33,16 @@ export default function AuctionMessage({ onInputChange }) {
                 <h2 className="font-sans text-myWhite  text-[18px] mt-6 mb-10  w-fit ">
                   Register now and get 1000 credits to use right away.
                 </h2>
-              </div>
-              <div className="mx-auto w-fit h-[51px] ">
-                <Link href="/register">
-                  <Button
-                    textColor="text-myWhite"
-                    content="REGISTER NOW"
-                    bgColor="bg-cherryRed"
-                    secColor="bg-myBlack"
-                  />
-                </Link>
+                <div className="mx-auto xl:ml-0 xl:mr-auto w-[170px] h-[51px] ">
+                  <Link href="/register">
+                    <Button
+                      textColor="text-myWhite"
+                      content="REGISTER NOW"
+                      bgColor="bg-cherryRed"
+                      secColor="bg-myBlack"
+                    />
+                  </Link>
+                </div>
               </div>
             </>
           }
@@ -80,7 +80,7 @@ export default function AuctionMessage({ onInputChange }) {
           </div>
 
           <select
-            className="xl:hidden ml-6 px-[16px] bg-sunnyOrange rounded-lg  text-xl font-semibold font-button h-[51px] drop-shadow-button "
+            className="xl:hidden ml-6 px-[16px] bg-sunnyOrange rounded-lg  text-xl font-semibold font-button h-[51px] drop-shadow-button"
             name="sortBy"
             value={sortValue}
             onChange={(e) => setSortValue(e.target.value)}

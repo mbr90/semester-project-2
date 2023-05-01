@@ -81,7 +81,7 @@ export default function AuctionCardReusable(props) {
       </div>
       <div
         onClick={clicked}
-        className={`p-mobMargin cursor-pointer text-myWhite flex w-full ${
+        className={`p-mobMargin cursor-pointer text-myWhite flex w-full min-h-[180px] ${
           isTruncated ? "" : "pointer-events-none"
         }`}
       >

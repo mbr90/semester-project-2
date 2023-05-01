@@ -9,8 +9,6 @@ import Username from "@/components/tools/Username";
 
 import ClientOnly from "@/components/tools/ClientOnly";
 
-import FormatDate from "@/components/tools/FormatDate";
-
 export default function Profile() {
   return (
     <>
@@ -22,7 +20,7 @@ export default function Profile() {
       </Head>
       <Header />
       <Return />
-      <main className="flex-col min-h-screen bg-plumWine xl:px-[100px]">
+      <main className="flex-col min-h-screen bg-plumWine">
         <div className="flex w-full p-mobMargin">
           <div className="flex my-mobMargin w-full max-w-[1920px] mx-auto xl:px-[100px] ">
             <h1 className="text-myWhite border-b-2 font-button text-[20px] px-[16px] py-2   ">

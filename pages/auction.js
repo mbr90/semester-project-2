@@ -76,10 +76,10 @@ export default function Auction() {
 
       break;
     case "High Bid":
-      sortQuery = BidFlag + SellerFlag + ActiveFlag;
+      sortQuery = BidFlag + SellerFlag + ActiveFlag + LimitFlag;
       break;
     case "Low Bid":
-      sortQuery = BidFlag + SellerFlag + ActiveFlag;
+      sortQuery = BidFlag + SellerFlag + ActiveFlag + LimitFlag;
       break;
     case "Title A-Z":
       sortQuery =
@@ -91,7 +91,7 @@ export default function Auction() {
         SortOrderFlag +
         "asc" +
         LimitFlag;
-      setOffset(0);
+
       break;
     case "Title Z-A":
       sortQuery =
@@ -103,7 +103,7 @@ export default function Auction() {
         SortOrderFlag +
         "desc" +
         LimitFlag;
-      setOffset(0);
+
       break;
     default:
       sortQuery =

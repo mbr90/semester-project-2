@@ -47,7 +47,7 @@ export default function BidsAndListings() {
                         <h1 className="font-serif text-[27px]">
                           {listing.title}
                         </h1>
-                        <p>{listing.description}</p>
+                        <p className="min-h-[100px]">{listing.description}</p>
                       </div>
                     </div>
                     <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
@@ -90,7 +90,9 @@ export default function BidsAndListings() {
                         <h1 className="font-serif text-[27px]">
                           {item.listing.title}
                         </h1>
-                        <p>{item.listing.description}</p>
+                        <p className="min-h-[100px]">
+                          {item.listing.description}
+                        </p>
                       </div>
                     </div>
                     <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
@@ -142,7 +144,7 @@ export default function BidsAndListings() {
                           <h1 className="font-serif text-[27px]">
                             {listing.title}
                           </h1>
-                          <p>{listing.description}</p>
+                          <p className="min-h-[100px]">{listing.description}</p>
                         </div>
                       </div>
                       <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">
@@ -189,7 +191,9 @@ export default function BidsAndListings() {
                           <h1 className="font-serif text-[27px]">
                             {item.listing.title}
                           </h1>
-                          <p>{item.listing.description}</p>
+                          <p className="min-h-[100px]">
+                            {item.listing.description}
+                          </p>
                         </div>
                       </div>
                       <div className="border-t-2 border-myWhite flex justify-between pl-mobMargin py-mobMargin pr-[20px]">

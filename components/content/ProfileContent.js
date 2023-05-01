@@ -7,6 +7,10 @@ import Accordion from "../Accordion";
 import { MdClose } from "react-icons/md";
 import GenericInput from "./form/GenericInput";
 import { useRouter } from "next/router";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp,
+} from "react-icons/md";
 
 const ProfileURL = "https://api.noroff.dev/api/v1/auction/profiles/";
 export default function ProfileContent() {
@@ -16,6 +20,10 @@ export default function ProfileContent() {
   const [avtar, setAvatarValue] = useState("");
   const [avtarError, setAvatarError] = useState(false);
   const [apiError, setApiError] = useState("");
+  const [showRows, setShowRows] = useState(false);
+  const toggleRows = () => {
+    setShowRows(!showRows);
+  };
 
   const avatarValue = (value) => {
     setAvatarValue(value);
@@ -185,6 +193,7 @@ export default function ProfileContent() {
             </ul>
           </section>
         </div>
+
         <div className="xl:hidden">
           <Accordion title="Winning History">
             {" "}
@@ -219,6 +228,7 @@ export default function ProfileContent() {
             </div>
           </Accordion>
         </div>
+
         {isModalOpen && (
           <div className="fixed inset-0 h-full z-50  bg-midnightBlue bg-opacity-90">
             <div
@@ -253,20 +263,116 @@ export default function ProfileContent() {
           </div>
         )}
       </div>
+
+      <section className="hidden xl:flex max-w-[1920px] gap-[86px] mx-auto pb-[100px]">
+        <div className="bg-midnightBlue w-full text-myWhite p-mobMargin drop-shadow-button">
+          <h1 className="text-[27px] font-serif pb-mobMargin">
+            Winning History:
+          </h1>
+
+          <table className="text-myWhite mx-auto w-full table">
+            <thead className="table-fixed w-full">
+              <tr className="font-sans text-[20px]">
+                <th className="w-1/3">Item</th>
+                <th className="w-1/3">Bids</th>
+                <th className="w-1/3">Bid</th>
+              </tr>
+            </thead>
+            <tbody>
+              {itemDetails.slice(0, 5).map((item, index) => {
+                const sortedBids = item.bids.sort(
+                  (a, b) => b.amount - a.amount
+                );
+
+                // console.log(sortedBids);
+                const highestBid = sortedBids[0]?.amount;
+
+                return (
+                  <tr className="w-full" key={index}>
+                    <td className="px-4 py-2 ">
+                      <div className="flex justify-center">{item.title}</div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="flex justify-center">
+                        {item.bids.length}
+                      </div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="flex justify-center">
+                        {highestBid} Credits{" "}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+
+              {!showRows && itemDetails.length > 5 && (
+                <tr>
+                  <td colSpan="3">
+                    <div className="flex justify-center min-h-[50px]">
+                      <span className="cursor-pointer" onClick={toggleRows}>
+                        <MdOutlineKeyboardArrowDown className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              )}
+
+              {showRows &&
+                itemDetails.slice(5).map((item, index) => {
+                  const sortedBids = item.bids.sort(
+                    (a, b) => b.amount - a.amount
+                  );
+
+                  const highestBid = sortedBids[0]?.amount;
+
+                  return (
+                    <tr className="w-full" key={index}>
+                      <td className="px-4 py-2 ">
+                        <div className="flex justify-center">{item.title}</div>
+                      </td>
+                      <td className="px-4 py-2">
+                        <div className="flex justify-center">
+                          {item.bids.length}
+                        </div>
+                      </td>
+                      <td className="px-4 py-2">
+                        <div className="flex justify-center">
+                          {highestBid} Credits{" "}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+
+              {showRows && itemDetails.length > 5 && (
+                <tr>
+                  <td colSpan="3">
+                    <div className="flex justify-center min-h-[50px]">
+                      <span className="cursor-pointer" onClick={toggleRows}>
+                        <MdOutlineKeyboardArrowUp className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 }
 
-//Regex from ChatGPT
 function isValidUrl(value) {
   const pattern = new RegExp(
-    "^(https?:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+    "^(https?:\\/\\/)?" +
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" +
+      "((\\d{1,3}\\.){3}\\d{1,3}))" +
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
+      "(\\?[;&a-z\\d%_.~+=-]*)?" +
       "(\\#[-a-z\\d_]*)?$",
     "i"
-  ); // fragment locator
+  );
   return !!pattern.test(value);
 }

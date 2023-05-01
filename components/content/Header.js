@@ -55,6 +55,9 @@ export default function Header() {
   const handleLogout = () => {
     Logout();
     router.push("/");
+    if (currentRoute === "/") {
+      router.reload();
+    }
   };
 
   return (
