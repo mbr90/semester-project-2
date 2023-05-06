@@ -163,34 +163,37 @@ export default function ProfileContent() {
             </div>
           </div>
           <section className="text-myWhite  mx-mobMargin border-b-2 mb-mobMargin py-mobMargin xl:border-none xl:my-auto xl:ml-60">
-            <h2 className="font-serif text-[27px]">{name}</h2>
+            <div className="w-fit mx-auto xl:mx-0">
+              <h2 className="font-serif text-[27px] xl:mx-0 mx-auto w-fit">
+                {name}
+              </h2>
+              <ul className=" mx-auto flex-col font-sans text-[18px]">
+                <div>
+                  <li className="xl:mb-4 mt-6">
+                    <span className={liKey}>Email:</span>
+                    {data?.email}
+                  </li>
+                  <li>
+                    <span className={liKey}>Credits:</span> {data?.credits}
+                  </li>
+                </div>
 
-            <ul className=" flex-col font-sans text-[18px]">
-              <div>
-                <li className="xl:mb-4 mt-8">
-                  <span className={liKey}>Email:</span>
-                  {data?.email}
-                </li>
-                <li>
-                  <span className={liKey}>Credits:</span> {data?.credits}
-                </li>
-              </div>
-
-              <div className="xl:flex xl:gap-x-4 xl:absolute xl:bottom-6 xm:mr-4">
-                <li className=" flex flex-row xl:flex-col">
-                  <div className={liKey}>Auction Wins:</div>
-                  <p className="xl:mx-auto"> {data?.wins?.length}</p>
-                </li>
-                <li className=" flex flex-row xl:flex-col">
-                  <div className={liKey}>Auction Bids:</div>
-                  <p className="xl:mx-auto">{userBids?.length}</p>
-                </li>
-                <li className=" flex flex-row xl:flex-col">
-                  <div className={liKey}>My Listings:</div>
-                  <p className="xl:mx-auto">{data?._count?.listings}</p>
-                </li>
-              </div>
-            </ul>
+                <div className="xl:flex xl:gap-x-4 xl:absolute xl:bottom-6 xl:mr-4">
+                  <li className=" flex flex-row xl:flex-col">
+                    <div className={liKey}>Auction Wins:</div>
+                    <p className="xl:mx-auto"> {data?.wins?.length}</p>
+                  </li>
+                  <li className=" flex flex-row xl:flex-col">
+                    <div className={liKey}>Auction Bids:</div>
+                    <p className="xl:mx-auto">{userBids?.length}</p>
+                  </li>
+                  <li className=" flex flex-row xl:flex-col">
+                    <div className={liKey}>My Listings:</div>
+                    <p className="xl:mx-auto">{data?._count?.listings}</p>
+                  </li>
+                </div>
+              </ul>
+            </div>
           </section>
         </div>
 
