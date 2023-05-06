@@ -247,7 +247,7 @@ export default function ProfileContent() {
                       error={avtarError}
                     />
                   </div>
-                  <div className="text-sunnyOrange w-fit max-w-[300px] mx-auto">
+                  <div className="text-sunnyOrange w-fit pb-8 max-w-[500px] mx-auto">
                     {apiError}
                   </div>
                   <div className="w-fit h-[53px] mx-auto">
