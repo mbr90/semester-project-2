@@ -262,7 +262,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                   {bidError}
                 </div>
 
-                {!isModal2Open && (
+                {isModal2Open && (
                   <div className="fixed inset-0 h-full z-50  bg-midnightBlue bg-opacity-90">
                     <div
                       onClick={closeBid}
