@@ -113,7 +113,7 @@ export default function ProfileContent() {
       setAvatarError("This field cannot be empty.");
       return false;
     } else if (!isValidUrl(avtar)) {
-      setAvatarError("Invalid URL format.");
+      setAvatarError("It looks like this is not a valid image URL");
       return false;
     }
 
@@ -346,7 +346,8 @@ function isValidUrl(value) {
       "((\\d{1,3}\\.){3}\\d{1,3}))" +
       "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
       "(\\?[;&a-z\\d%_.~+=-]*)?" +
-      "(\\#[-a-z\\d_]*)?$",
+      "(\\#[-a-z\\d_]*)?" +
+      ".*\\.(jpg|jpeg|png|gif|bmp|webp)((\\?.*)?)$",
     "i"
   );
   return !!pattern.test(value);
