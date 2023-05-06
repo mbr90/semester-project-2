@@ -281,7 +281,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                           profile under{" "}
                           <Link
                             className=" underline font-semibold cursor-pointer"
-                            href="/profiles/bids&listings/"
+                            href="/profiles/bids&listings/[]"
                           >
                             {" "}
                             My Bids & Listings{" "}
@@ -521,7 +521,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                             profile under{" "}
                             <Link
                               className=" underline font-semibold cursor-pointer"
-                              href="/profiles/bids&listings/"
+                              href="/profiles/bids&listings/[]"
                             >
                               My Bids & Listings
                             </Link>
