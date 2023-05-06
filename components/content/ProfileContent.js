@@ -198,15 +198,13 @@ export default function ProfileContent() {
           <Accordion title="Winning History">
             {" "}
             <div className="w-full bg-midnightBlue">
-              <table className="table-auto min-w-[300px] max-w-[500px] flex-col  text-myWhite mx-auto">
-                <thead>
-                  <tr className="font-sans text-[20px]">
-                    <th className=" px-4 py-2">Item</th>
-                    <th className=" px-4 py-2">Bids</th>
-                    <th className=" px-4 py-2">Bid</th>
-                  </tr>
-                </thead>
+              <table className="w-[70%] text-myWhite mx-auto">
                 <tbody>
+                  <tr className="font-sans text-[20px] font-bold">
+                    <td className="pb-4">Item</td>
+                    <td className="pb-4">Bids</td>
+                    <td className="pb-4">Bid</td>
+                  </tr>
                   {itemDetails.map((item, index) => {
                     const sortedBids = item.bids.sort(
                       (a, b) => b.amount - a.amount
@@ -214,23 +212,10 @@ export default function ProfileContent() {
                     const highestBid = sortedBids[0]?.amount;
 
                     return (
-                      <tr className="w-full flex-col" key={index}>
-                        <div className="flex justify-center">
-                          <td className="px-4 py-2 flex relative">
-                            {item.title}
-                          </td>
-                        </div>
-                        <td className="px-4 py-2">
-                          {" "}
-                          <div className="flex justify-center">
-                            {item.bids.length}{" "}
-                          </div>
-                        </td>
-
-                        <div className="flex justify-center">
-                          {" "}
-                          <td className="px-4 py-2">{highestBid}</td>
-                        </div>
+                      <tr key={index}>
+                        <td className="py-2 flex relative">{item.title}</td>
+                        <td className="py-2"> {item.bids.length}</td>
+                        <td className="py-2">{highestBid}</td>
                       </tr>
                     );
                   })}
@@ -275,21 +260,20 @@ export default function ProfileContent() {
         )}
       </div>
 
-      <section className="hidden xl:flex max-w-[1920px] gap-[86px] mx-auto pb-[100px]">
+      <section className="hidden xl:flex max-w-[1720px] gap-[86px] mx-auto pb-[100px]">
         <div className="bg-midnightBlue w-full text-myWhite p-mobMargin drop-shadow-button">
           <h1 className="ml-mobMargin mt-2 text-[27px] font-serif pb-mobMargin">
             Winning History:
           </h1>
 
-          <table className="text-myWhite mx-auto w-full table">
-            <thead className="table-fixed w-full">
-              <tr className="font-sans text-[20px]">
-                <th className="w-1/3">Item</th>
-                <th className="w-1/3">Bids</th>
-                <th className="w-1/3">Bid</th>
-              </tr>
-            </thead>
+          <table className="text-myWhite mx-auto w-[80%] text-center ">
             <tbody>
+              <tr className="font-sans text-[20px] font-bold">
+                <td className="pb-4">Item</td>
+                <td className="pb-4">Bids</td>
+                <td className="pb-4">Bid</td>
+              </tr>
+
               {itemDetails.slice(0, 5).map((item, index) => {
                 const sortedBids = item.bids.sort(
                   (a, b) => b.amount - a.amount
@@ -298,76 +282,57 @@ export default function ProfileContent() {
                 const highestBid = sortedBids[0]?.amount;
 
                 return (
-                  <tr className="w-full" key={index}>
-                    <td className="px-4 py-2 ">
-                      <div className="flex justify-center">{item.title}</div>
-                    </td>
-                    <td className="px-4 py-2">
-                      <div className="flex justify-center">
-                        {item.bids.length}
-                      </div>
-                    </td>
-                    <td className="px-4 py-2">
-                      <div className="flex justify-center">
-                        {highestBid} Credits{" "}
-                      </div>
-                    </td>
+                  <tr key={index}>
+                    <td className=" py-2 ">{item.title}</td>
+                    <td className=" py-2">{item.bids.length}</td>
+                    <td className=" py-2">{highestBid} Credits</td>
                   </tr>
                 );
               })}
 
-              {!showRows && itemDetails.length > 5 && (
-                <tr>
-                  <td colSpan="3">
-                    <div className="flex justify-center min-h-[50px]">
-                      <span className="cursor-pointer" onClick={toggleRows}>
-                        <MdOutlineKeyboardArrowDown className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-              )}
+              {itemDetails.slice(5).map((item, index) => {
+                const sortedBids = item.bids.sort(
+                  (a, b) => b.amount - a.amount
+                );
 
-              {showRows &&
-                itemDetails.slice(5).map((item, index) => {
-                  const sortedBids = item.bids.sort(
-                    (a, b) => b.amount - a.amount
-                  );
+                const highestBid = sortedBids[0]?.amount;
 
-                  const highestBid = sortedBids[0]?.amount;
-
-                  return (
-                    <tr className="w-full" key={index}>
-                      <td className="px-4 py-2 ">
-                        <div className="flex justify-center">{item.title}</div>
-                      </td>
-                      <td className="px-4 py-2">
-                        <div className="flex justify-center">
-                          {item.bids.length}
-                        </div>
-                      </td>
-                      <td className="px-4 py-2">
-                        <div className="flex justify-center">
-                          {highestBid} Credits{" "}
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-
-              {showRows && itemDetails.length > 5 && (
-                <tr>
-                  <td colSpan="3">
-                    <div className="flex justify-center min-h-[50px]">
-                      <span className="cursor-pointer" onClick={toggleRows}>
-                        <MdOutlineKeyboardArrowUp className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-              )}
+                return (
+                  <tr key={index}>
+                    <td className=" py-2 ">{item.title}</td>
+                    <td className=" py-2">{item.bids.length}</td>
+                    <td className=" py-2">{highestBid} Credits</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
+
+          {!showRows && itemDetails.length > 5 && (
+            <div className="w-full h-[60px] ">
+              <div
+                tabIndex={0}
+                className="cursor-pointer mx-auto w-fit"
+                onClick={toggleRows}
+                onKeyPress={toggleRows}
+              >
+                <MdOutlineKeyboardArrowDown className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
+              </div>
+            </div>
+          )}
+
+          {showRows && itemDetails.length > 5 && (
+            <div className="w-full h-[60px] ">
+              <div
+                tabIndex={0}
+                className="cursor-pointer mx-auto w-fit"
+                onClick={toggleRows}
+                onKeyPress={toggleRows}
+              >
+                <MdOutlineKeyboardArrowUp className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </div>
