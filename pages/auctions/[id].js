@@ -24,7 +24,6 @@ import BidOnAuction from "@/components/api/post/BidOnAuction";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import IsLoggedIn from "@/components/tools/IsLoggedIn";
-import ClientOnly from "@/components/tools/ClientOnly";
 
 export default function AuctionItem({ data, id, errorMessage }) {
   const router = useRouter();
@@ -263,7 +262,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                   {bidError}
                 </div>
 
-                {isModal2Open && (
+                {!isModal2Open && (
                   <div className="fixed inset-0 h-full z-50  bg-midnightBlue bg-opacity-90">
                     <div
                       onClick={closeBid}
@@ -279,7 +278,14 @@ export default function AuctionItem({ data, id, errorMessage }) {
 
                         <p className="max-w-[300px] font-sans text-center mx-auto pt-2">
                           You can monitor the progress of this listing on your
-                          profile under My Bids & Listings{" "}
+                          profile under{" "}
+                          <Link
+                            className=" underline font-semibold cursor-pointer"
+                            href="/profiles/bids&listings/"
+                          >
+                            {" "}
+                            My Bids & Listings{" "}
+                          </Link>{" "}
                         </p>
                         <div className="w-fit mx-auto p-mobMargin flex">
                           <MdArrowBackIosNew className="h-[24px] w-[24px] my-auto" />
@@ -512,7 +518,13 @@ export default function AuctionItem({ data, id, errorMessage }) {
 
                           <p className="max-w-[300px] font-sans text-center mx-auto pt-2">
                             You can monitor the progress of this listing on your
-                            profile under My Bids & Listings{" "}
+                            profile under{" "}
+                            <Link
+                              className=" underline font-semibold cursor-pointer"
+                              href="/profiles/bids&listings/"
+                            >
+                              My Bids & Listings
+                            </Link>
                           </p>
                           <div className="w-fit mx-auto p-mobMargin flex">
                             <MdArrowBackIosNew className="h-[24px] w-[24px] my-auto" />
