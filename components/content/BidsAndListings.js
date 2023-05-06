@@ -43,11 +43,14 @@ export default function BidsAndListings() {
                     key={index}
                     className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] min-[578px]:rounded-lg mx-auto my-10 flex-col overflow-hidden"
                   >
-                    <img
-                      src={listing.media}
-                      alt={listing.title}
-                      className="w-full h-[348px] my-auto object-cover shadow-lg "
-                    />
+                    <Link tabIndex={-1} href={`/auctions/${listing.id}`}>
+                      <img
+                        src={listing.media}
+                        alt={listing.title}
+                        className="w-full h-[348px] my-auto object-cover shadow-lg "
+                        onError={handleImageError}
+                      />
+                    </Link>
                     <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
                       <div className="w-11/12">
                         <h1 className="font-serif text-[27px]">
@@ -85,11 +88,14 @@ export default function BidsAndListings() {
                     key={index}
                     className=" w-full min-h-[717px]  bg-midnightBlue max-w-[577px] min-[578px]:rounded-lg mx-auto my-10 flex-col overflow-hidden"
                   >
-                    <img
-                      src={item.listing.media}
-                      alt={item.listing.title}
-                      className="w-full h-[348px] my-auto object-cover shadow-lg "
-                    />
+                    <Link tabIndex={-1} href={`/auctions/${item.listing.id}`}>
+                      <img
+                        src={item.listing.media}
+                        alt={item.listing.title}
+                        className="w-full h-[348px] my-auto object-cover shadow-lg "
+                        onError={handleImageError}
+                      />
+                    </Link>
 
                     <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
                       <div className="w-11/12">
@@ -122,7 +128,7 @@ export default function BidsAndListings() {
           </Accordion>
         </div>
         <div className="w-full px-[100px] max-w-[1920px] mx-auto">
-          <section className="invisible xl:visible w-full flex-col  pt-[50px] max-w-[1950px] mx-auto">
+          <section className="hidden xl:flex w-full flex-col  pt-[50px] max-w-[1950px] mx-auto">
             <h1 className="font-serif text-[27px] text-myWhite">My Listings</h1>
             <div className="w-full flex flex-wrap justify-center gap-x-[86px]  ">
               {myListings &&
@@ -140,12 +146,14 @@ export default function BidsAndListings() {
                       key={index}
                       className=" min-h-[717px]  bg-midnightBlue w-[510px]  min-[578px]:rounded-lg  my-10 flex-col overflow-hidden"
                     >
-                      <img
-                        src={listing.media}
-                        alt={listing.title}
-                        className="w-full h-[348px] my-auto object-cover shadow-lg "
-                        onError={handleImageError}
-                      />
+                      <Link tabIndex={-1} href={`/auctions/${listing.id}`}>
+                        <img
+                          src={listing.media}
+                          alt={listing.title}
+                          className="w-full h-[348px] my-auto object-cover shadow-lg hover:scale-105 transition-transform ease-out duration-1000 cursor-pointer "
+                          onError={handleImageError}
+                        />{" "}
+                      </Link>
                       <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
                         <div className="w-11/12">
                           <h1 className="font-serif text-[27px]">
@@ -174,10 +182,10 @@ export default function BidsAndListings() {
                 })}
             </div>
           </section>
-          <div className="invisible xl:visible w-full  my-16">
+          <div className="hidden xl:flex w-full  my-16">
             <div className="h-[4px] bg-myWhite w-full max-w-[1920px]  mx-auto rounded-xl"></div>
           </div>
-          <section className="invisible  xl:visible w-full flex-col  max-w-[1950px] py-[50px] mx-auto">
+          <section className="hidden  xl:flex w-full flex-col  max-w-[1950px] py-[50px] mx-auto">
             <h1 className="font-serif text-[27px] text-myWhite">My Bids</h1>
             <div className="w-full flex flex-wrap justify-center gap-x-[86px]  ">
               {myBids &&
@@ -187,11 +195,14 @@ export default function BidsAndListings() {
                       key={index}
                       className="  min-h-[717px]  bg-midnightBlue w-[510px] min-[578px]:rounded-lg my-10 flex-col overflow-hidden"
                     >
-                      <img
-                        src={item.listing.media}
-                        alt={item.listing.title}
-                        className="w-full h-[348px] my-auto object-cover shadow-lg "
-                      />
+                      <Link tabIndex={-1} href={`/auctions/${item.listing.id}`}>
+                        <img
+                          src={item.listing.media}
+                          alt={item.listing.title}
+                          className="w-full h-[348px] my-auto object-cover shadow-lg hover:scale-105 transition-transform ease-out duration-1000 cursor-pointer "
+                          onError={handleImageError}
+                        />
+                      </Link>
 
                       <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
                         <div className="w-11/12">

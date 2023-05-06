@@ -323,37 +323,25 @@ export default function AuctionItem({ data, id, errorMessage }) {
           </Accordion>
           <Accordion title="Bidding History">
             <div className="bg-midnightBlue w-full text-myWhite p-mobMargin">
-              <table className="table-auto w-full bg-midnightBlue text-myWhite">
-                <thead>
-                  <tr className="font-sans text-[20px]">
-                    <th className=" px-4 py-2">Bidder</th>
-                    <th className=" px-4 py-2">Time of Bid</th>
-                    <th className=" px-4 py-2">Bid</th>
-                  </tr>
-                </thead>
+              <table className="text-myWhite mx-auto w-[80%] ">
                 <tbody>
+                  <tr className="font-sans text-[20px] font-bold">
+                    <td className="pb-4">Bidder</td>
+                    <td className="pb-4">Time of Bid</td>
+                    <td className="pb-4">Bid</td>
+                  </tr>
                   {sortedBids.map((bidder, index) => (
-                    <tr className=" w-full flex-col" key={index}>
-                      <div className="flex justify-center">
-                        <td className="px-4 py-2 flex relative">
-                          {" "}
-                          {bidder.amount === highestBid && (
-                            <FaCrown className="-left-2 top-[28%] my-auto text-sunnyOrange absolute " />
-                          )}{" "}
-                          {bidder.bidderName}{" "}
-                        </td>
-                      </div>
-                      <td className="px-4 py-2">
-                        <div className="flex justify-center">
-                          {" "}
-                          <DateNTime date={bidder.created} />
-                        </div>
+                    <tr key={index}>
+                      <td className="py-2 relative">
+                        {bidder.amount === highestBid && (
+                          <FaCrown className="-left-5 top-[28%] my-auto text-sunnyOrange absolute " />
+                        )}
+                        {bidder.bidderName}
                       </td>
-
-                      <div className="flex justify-center">
-                        {" "}
-                        <td className="px-4 py-2">{bidder.amount}</td>
-                      </div>
+                      <td className="py-2 ">
+                        <DateNTime date={bidder.created} />
+                      </td>
+                      <td className="py-2 "> {bidder.amount} </td>
                     </tr>
                   ))}
                 </tbody>
@@ -582,104 +570,72 @@ export default function AuctionItem({ data, id, errorMessage }) {
                 <h1 className="ml-mobMargin mt-2 text-[27px] font-serif pb-mobMargin">
                   Bidding History:
                 </h1>
-
-                <table className="text-myWhite mx-auto w-full table">
-                  <thead className="table-fixed w-full">
-                    <tr className="font-sans text-[20px]">
-                      <th className="w-1/3">Bidder</th>
-                      <th className="w-1/3">Time of Bid</th>
-                      <th className="w-1/3">Bid</th>
+                <table className="text-myWhite mx-auto w-[80%] ">
+                  <tbody>
+                    <tr className="font-sans text-[20px] font-bold">
+                      <td className="pb-4">Bidder</td>
+                      <td className="pb-4">Time of Bid</td>
+                      <td className="pb-4">Bid</td>
                     </tr>
-                  </thead>
-                  <tbody className="table-fixed w-full">
                     {sortedBids.slice(0, 5).map((bidder, index) => (
-                      <tr className="w-full" key={index}>
-                        <div className="flex justify-center ">
-                          <td className="px-4 py-2 flex relative">
+                      <tr key={index}>
+                        <td className="py-2 relative">
+                          {bidder.amount === highestBid && (
+                            <FaCrown className="-left-5 top-[28%] my-auto text-sunnyOrange absolute " />
+                          )}
+                          {bidder.bidderName}
+                        </td>
+                        <td className="py-2 ">
+                          <DateNTime date={bidder.created} />
+                        </td>
+                        <td className="py-2 "> {bidder.amount} </td>
+                      </tr>
+                    ))}
+
+                    {showRows &&
+                      sortedBids.slice(5).map((bidder, index) => (
+                        <tr key={index}>
+                          <td className=" py-2 relative">
                             {bidder.amount === highestBid && (
                               <FaCrown className="-left-2 top-[28%] my-auto text-sunnyOrange absolute " />
                             )}
                             {bidder.bidderName}
                           </td>
-                        </div>
 
-                        <td className="px-4 py-2">
-                          <div className="flex justify-center">
+                          <td className="py-2">
                             <DateNTime date={bidder.created} />
-                          </div>
-                        </td>
-
-                        <td className="px-4 py-2">
-                          {" "}
-                          <div className="flex justify-center">
-                            {bidder.amount}{" "}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-
-                    {!showRows && sortedBids.length > 5 && (
-                      <tr>
-                        <td colSpan="3">
-                          <div className="flex justify-center min-h-[50px]">
-                            <span
-                              tabIndex={0}
-                              className="cursor-pointer"
-                              onClick={toggleRows}
-                              onKeyPress={toggleRows}
-                            >
-                              <MdOutlineKeyboardArrowDown className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-
-                    {showRows &&
-                      sortedBids.slice(5).map((bidder, index) => (
-                        <tr className="w-full" key={index}>
-                          <div className="flex justify-center ">
-                            <td className="px-4 py-2 flex relative">
-                              {bidder.amount === highestBid && (
-                                <FaCrown className="-left-2 top-[28%] my-auto text-sunnyOrange absolute " />
-                              )}
-                              {bidder.bidderName}
-                            </td>
-                          </div>
-
-                          <td className="px-4 py-2">
-                            <div className="flex justify-center">
-                              <DateNTime date={bidder.created} />
-                            </div>
                           </td>
-
-                          <td className="px-4 py-2">
-                            {" "}
-                            <div className="flex justify-center">
-                              {bidder.amount}{" "}
-                            </div>
-                          </td>
+                          <td className="py-2"> {bidder.amount} </td>
                         </tr>
                       ))}
-
-                    {showRows && sortedBids.length > 5 && (
-                      <tr>
-                        <td colSpan="3">
-                          <div className="flex justify-center min-h-[50px]">
-                            <span
-                              tabIndex={0}
-                              className="cursor-pointer"
-                              onClick={toggleRows}
-                              onKeyPress={toggleRows}
-                            >
-                              <MdOutlineKeyboardArrowUp className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                    )}
                   </tbody>
                 </table>
+
+                {!showRows && sortedBids.length > 5 && (
+                  <div className="w-full h-[60px] ">
+                    <div
+                      tabIndex={0}
+                      className="cursor-pointer mx-auto w-fit"
+                      onClick={toggleRows}
+                      onKeyPress={toggleRows}
+                    >
+                      <MdOutlineKeyboardArrowDown className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
+                    </div>
+                  </div>
+                )}
+
+                {showRows && sortedBids.length > 5 && (
+                  <div className="w-full h-[60px] ">
+                    <div
+                      tabIndex={0}
+                      className="cursor-pointer mx-auto w-fit"
+                      onClick={toggleRows}
+                      onKeyPress={toggleRows}
+                    >
+                      <MdOutlineKeyboardArrowUp className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </section>
