@@ -3,10 +3,8 @@ import Header from "@/components/content/Header";
 import Footer from "@/components/content/Footer";
 import AuctionMessage from "@/components/content/AuctionMessage";
 import AuctionVardV2 from "@/components/AuctionCardV2";
-// import DataFetch from "@/components/api/fetch/DataFetch";
-// import LoadingSpinner from "@/components/tools/LoadingSpinner";
 import { useState, useEffect, useRef } from "react";
-import Button from "@/components/Button";
+import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 
 const AuctionURL = "https://api.noroff.dev/api/v1/auction/listings?";
 
@@ -32,6 +30,8 @@ export default function Auction() {
   const [error, setError] = useState(null);
   const scrollToTopRef = useRef(null);
 
+  const maxPages = 10;
+
   function handleInputChange(searchValue, sortValue) {
     setSearchValue(searchValue);
     setSortValue(sortValue);
@@ -49,7 +49,6 @@ export default function Auction() {
         SortOrderFlag +
         "asc" +
         LimitFlag;
-
       break;
     case "Newest":
       sortQuery =
@@ -61,7 +60,6 @@ export default function Auction() {
         SortOrderFlag +
         "desc" +
         LimitFlag;
-
       break;
     case "Oldest":
       sortQuery =
@@ -73,7 +71,6 @@ export default function Auction() {
         SortOrderFlag +
         "asc" +
         LimitFlag;
-
       break;
     case "High Bid":
       sortQuery = BidFlag + SellerFlag + ActiveFlag + LimitFlag;
@@ -91,7 +88,6 @@ export default function Auction() {
         SortOrderFlag +
         "asc" +
         LimitFlag;
-
       break;
     case "Title Z-A":
       sortQuery =
@@ -103,7 +99,6 @@ export default function Auction() {
         SortOrderFlag +
         "desc" +
         LimitFlag;
-
       break;
     default:
       sortQuery =
@@ -120,12 +115,13 @@ export default function Auction() {
   function handlePrevPage() {
     if (offset > 0) {
       setOffset(offset - 30);
+      scrollToTopRef.current.scrollIntoView({ behavior: "auto" });
     }
   }
 
   function handleNextPage() {
     setOffset(offset + 30);
-    scrollToTopRef.current.scrollIntoView({ behavior: "smooth" });
+    scrollToTopRef.current.scrollIntoView({ behavior: "auto" });
   }
 
   const fullAuctionURL = AuctionURL + sortQuery + OffsetFlag + offset;
@@ -227,13 +223,48 @@ export default function Auction() {
                 );
               })}
           </div>
-          <div className="max-w-[577px] xl:max-w-[1720px] w-full flex justify-between mx-auto h-[53px] px-mobMargin">
+
+          <div className="max-w-[577px] xl:max-w-[1720px] w-fit flex  mx-auto  my-mobMargin px-mobMargin">
             {offset > 0 && (
-              <Button content="Prev" handler={handlePrevPage}></Button>
+              <div
+                onClick={handlePrevPage}
+                onKeyPress={handlePrevPage}
+                tabIndex={0}
+                className="w-fit h-fit cursor-pointer flex my-auto text-myWhite hover:underline"
+              >
+                <MdArrowBackIos className="w-fit h-fit my-auto" />
+                <span>Prev</span>
+              </div>
             )}
-            <div className="w-fit ml-auto mr-0">
-              <Button content="Next" handler={handleNextPage}></Button>
+            <div className="pagination flex items-center mx-mobMargin text-myWhite">
+              {Array.from({ length: maxPages }, (_, index) => (
+                <button
+                  key={index}
+                  className={`mx-[6px] ${
+                    offset / 30 === index ? "bg-white text-black" : "text-white"
+                  } ${offset / 30 === index ? "underline font-bold" : ""}`}
+                  onClick={() => {
+                    setOffset(index * 30);
+                    scrollToTopRef.current.scrollIntoView({
+                      behavior: "auto",
+                    });
+                  }}
+                >
+                  {index + 1}
+                </button>
+              ))}
             </div>
+            {offset / 30 < maxPages - 1 && (
+              <div
+                onClick={handleNextPage}
+                onKeyPress={handleNextPage}
+                tabIndex={0}
+                className="w-fit h-fit cursor-pointer flex my-auto text-myWhite hover:underline"
+              >
+                <span>Next</span>{" "}
+                <MdArrowForwardIos className="w-fit h-fit my-auto" />
+              </div>
+            )}
           </div>
         </div>
       </main>

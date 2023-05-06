@@ -17,6 +17,12 @@ export default function BidsAndListings() {
     myBids = GetProfileData({ endpoint: profileBids });
   }
 
+  const defaultImage = "/images/defaultProduct.avif";
+
+  const handleImageError = (e) => {
+    e.target.src = defaultImage;
+  };
+
   return (
     <>
       <ClientOnly>
@@ -61,7 +67,7 @@ export default function BidsAndListings() {
                           <FormatDate date={listing.endsAt} />
                         </p>
                       </div>
-                      <Link href={`/auctions/${listing.id}`}>
+                      <Link tabIndex={-1} href={`/auctions/${listing.id}`}>
                         <Button content="VIEW ITEM" />
                       </Link>
                     </div>
@@ -106,7 +112,7 @@ export default function BidsAndListings() {
                           <FormatDate date={item.listing.endsAt} />
                         </p>
                       </div>
-                      <Link href={`/auctions/${item.listing.id}`}>
+                      <Link tabIndex={-1} href={`/auctions/${item.listing.id}`}>
                         <Button content="VIEW ITEM" />
                       </Link>
                     </div>
@@ -117,7 +123,7 @@ export default function BidsAndListings() {
         </div>
         <div className="w-full px-[100px] max-w-[1920px] mx-auto">
           <section className="invisible xl:visible w-full flex-col  pt-[50px] max-w-[1950px] mx-auto">
-            <h1 className="font-serif text-[20px] text-myWhite">My Listings</h1>
+            <h1 className="font-serif text-[27px] text-myWhite">My Listings</h1>
             <div className="w-full flex flex-wrap justify-center gap-x-[86px]  ">
               {myListings &&
                 myListings.map((listing, index) => {
@@ -138,6 +144,7 @@ export default function BidsAndListings() {
                         src={listing.media}
                         alt={listing.title}
                         className="w-full h-[348px] my-auto object-cover shadow-lg "
+                        onError={handleImageError}
                       />
                       <div className="p-mobMargin cursor-pointer text-myWhite flex w-full">
                         <div className="w-11/12">
@@ -158,7 +165,7 @@ export default function BidsAndListings() {
                             <FormatDate date={listing.endsAt} />
                           </p>
                         </div>
-                        <Link href={`/auctions/${listing.id}`}>
+                        <Link tabIndex={-1} href={`/auctions/${listing.id}`}>
                           <Button content="VIEW ITEM" />
                         </Link>
                       </div>
@@ -171,7 +178,7 @@ export default function BidsAndListings() {
             <div className="h-[4px] bg-myWhite w-full max-w-[1920px]  mx-auto rounded-xl"></div>
           </div>
           <section className="invisible  xl:visible w-full flex-col  max-w-[1950px] py-[50px] mx-auto">
-            <h1 className="font-serif text-[20px] text-myWhite">My Bids</h1>
+            <h1 className="font-serif text-[27px] text-myWhite">My Bids</h1>
             <div className="w-full flex flex-wrap justify-center gap-x-[86px]  ">
               {myBids &&
                 myBids.map((item, index) => {
@@ -207,7 +214,10 @@ export default function BidsAndListings() {
                             <FormatDate date={item.listing.endsAt} />
                           </p>
                         </div>
-                        <Link href={`/auctions/${item.listing.id}`}>
+                        <Link
+                          tabIndex={-1}
+                          href={`/auctions/${item.listing.id}`}
+                        >
                           <Button content="VIEW ITEM" />
                         </Link>
                       </div>

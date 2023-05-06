@@ -9,6 +9,7 @@ import { useState } from "react";
 import Link from "next/link";
 import PlaceListing from "../api/post/PlaceListing";
 import LoadingSpinner from "../tools/LoadingSpinner";
+import Username from "../tools/Username";
 
 export default function NewListing() {
   const [fields, setFields] = useState([{ label: "Item image URL*" }]);
@@ -137,8 +138,8 @@ export default function NewListing() {
   };
 
   return (
-    <div className="w-full xl:px-[100px]">
-      <div className="bg-midnightBlue w-full text-myWhite mb-40 max-w-[1720px] mx-auto">
+    <div className="w-full xl:px-[100px] pb-40">
+      <div className="bg-midnightBlue w-full text-myWhite  max-w-[1720px] mx-auto">
         <Image
           className="w-[370px] h-auto my-auto mx-auto py-mobMargin"
           src={logo}
@@ -155,7 +156,7 @@ export default function NewListing() {
               error={titleError}
             />
           </div>
-          <div className="my-mobMargin">
+          <div className="my-mobMargin mb-10">
             <TextArea
               label="Description"
               onInputChange={descriptionValue}
@@ -186,14 +187,18 @@ export default function NewListing() {
                     <MdRemove
                       className="w-[38px] h-[38px] cursor-pointer hover:w-[40px] hover:h-[40px] absolute -right-2 top-[12%]"
                       onClick={() => handleRemoveField(field.id)}
+                      onKeyPress={() => handleRemoveField(field.id)}
+                      tabIndex={0}
                     />
                   )}
                 </div>
               </div>
             ))}
             <div
+              tabIndex={0}
               onClick={handleAddField}
-              className=" flex h-[40px] cursor-pointer group  mx-auto"
+              onKeyPress={handleAddField}
+              className=" flex h-[40px] cursor-pointer group mt-6  mx-auto"
             >
               {fields.length < 3 && (
                 <>
@@ -232,7 +237,13 @@ export default function NewListing() {
                 </h1>
                 <p className="max-w-[300px] font-sans text-center mx-auto pt-2">
                   You can monitor the progress of this listing on your profile
-                  under My Bids & Listings.
+                  under{" "}
+                  <Link href={`/profiles/bids&listings/${Username()}`}>
+                    {" "}
+                    <span className="font-bold cursor-pointer hover:underline">
+                      My Bids & Listings.
+                    </span>
+                  </Link>
                 </p>
                 <div className="w-fit mx-auto p-mobMargin flex">
                   <MdArrowBackIosNew className="h-[24px] w-[24px] my-auto" />

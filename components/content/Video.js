@@ -1,8 +1,22 @@
 import Link from "next/link";
 import Button from "../Button";
 import IsLoggedIn from "../tools/IsLoggedIn";
+import { useState, useRef } from "react";
+import { MdPauseCircleOutline, MdPlayCircleOutline } from "react-icons/md";
 
 export default function Video() {
+  const [isPlaying, setPlaying] = useState(true);
+  const videoRef = useRef();
+
+  const handlePause = () => {
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+    setPlaying(!isPlaying);
+  };
+
   return (
     <div className="relative flex justify-center w-full min-h-[362px]">
       <div className=" absolute z-20 self-center">
@@ -15,7 +29,7 @@ export default function Video() {
         <IsLoggedIn
           fallback={
             <div className="text-center relative w-fit h-[51px] mx-auto ">
-              <Link href="/register">
+              <Link tabIndex={-1} href="/register">
                 <Button
                   textColor="text-myWhite"
                   content="REGISTER NOW"
@@ -27,45 +41,28 @@ export default function Video() {
           }
         />
       </div>
-      <video
-        autoPlay
-        muted
-        className="relative w-full min-h-[362px] object-none xl:object-fill z-10 m-0 p-0"
-        loop
-        src={require("../../public/video/index.mp4")}
-      />
+      <div className="w-full relative">
+        <video
+          autoPlay
+          muted
+          className="relative w-full min-h-[362px] object-none xl:object-fill z-10 m-0 p-0"
+          loop
+          src={require("../../public/video/index.mp4")}
+          ref={videoRef}
+        />
+        <div
+          onClick={handlePause}
+          onKeyPress={handlePause}
+          tabIndex={0}
+          className="text-myWhite absolute bottom-5 right-5 xl:right-10  z-20 cursor-pointer"
+        >
+          {isPlaying ? (
+            <MdPauseCircleOutline className="w-10 h-10"></MdPauseCircleOutline>
+          ) : (
+            <MdPlayCircleOutline className="w-10 h-10"></MdPlayCircleOutline>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
-
-// In Next.js, you can add a pause button to a background video by utilizing the ref attribute and the HTMLMediaElement API.
-
-// First, you need to create a reference to the video element in your component using the useRef hook. Then, you can add an event listener to the pause button that calls the pause() method on the video element.
-
-// Here's an example of how to add a pause button to a background video in Next.js:
-
-// jsx
-// Copy code
-// import { useRef } from "react";
-
-// export default function Home() {
-//   const videoRef = useRef();
-
-//   const handlePause = () => {
-//     videoRef.current.pause();
-//   };
-
-//   return (
-//     <div>
-//       <button onClick={handlePause}>Pause Video</button>
-//       <video ref={videoRef} autoPlay muted loop>
-//         <source src="/video.mp4" type="video/mp4" />
-//       </video>
-//     </div>
-//   );
-// }
-// In this example, the videoRef variable is used to create a reference to the video element using the useRef hook. The handlePause function is called when the user clicks on the pause button, which calls the pause() method on the video element.
-
-// The video element itself is defined inside the return statement, with the ref attribute set to the videoRef variable. The autoPlay, muted, and loop attributes are used to automatically play the video, mute it, and loop it respectively.
-
-// By using this approach, you can easily add a pause button to a background video in Next.js.

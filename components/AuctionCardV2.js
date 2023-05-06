@@ -27,6 +27,15 @@ export default function AuctionCardReusable(props) {
     setIsClicked(!isClicked);
   };
 
+  function getSingleImageUrl(image) {
+    if (Array.isArray(image)) {
+      return image[0];
+    }
+    return image;
+  }
+
+  const imageUrl = getSingleImageUrl(image);
+
   useEffect(() => {
     if (descriptionRef.current) {
       const lineHeight = parseInt(
@@ -53,6 +62,10 @@ export default function AuctionCardReusable(props) {
     }
   }, [description]);
 
+  const handleImageError = (e) => {
+    e.target.src = defaultImage;
+  };
+
   const textMinimized = "line-clamp-3 font-sans text-[18px]    ";
   const textMaximized = "line-clamp font-sans text-[18px]     ";
 
@@ -63,13 +76,15 @@ export default function AuctionCardReusable(props) {
           <img
             src={defaultImage}
             alt="Default Image"
-            className="w-full h-[348px] my-auto object-cover shadow-lg hover:scale-105 transition-transform cursor-pointer"
+            className="w-full h-[348px] my-auto object-cover shadow-lg hover:scale-105 transition-transform ease-out dura duration-1000 cursor-pointer"
+            onError={handleImageError}
           />
         ) : (
           <img
-            src={image}
+            src={imageUrl}
             alt={title}
-            className="w-full h-[348px] my-auto object-cover shadow-lg hover:scale-105 transition-transform cursor-pointer"
+            className="w-full h-[348px] my-auto object-cover shadow-lg hover:scale-105 transition-transform ease-out duration-1000 cursor-pointer"
+            onError={handleImageError}
           />
         )}
       </Link>
@@ -117,7 +132,7 @@ export default function AuctionCardReusable(props) {
           </p>
         </div>
 
-        <Link href={`/auctions/${id}`}>
+        <Link tabIndex={-1} href={`/auctions/${id}`}>
           {" "}
           <Button content="BID NOW" />
         </Link>

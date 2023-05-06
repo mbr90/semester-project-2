@@ -33,8 +33,8 @@ export default function AuctionMessage({ onInputChange }) {
                 <h2 className="font-sans text-myWhite  text-[18px] mt-6 mb-10  w-fit ">
                   Register now and get 1000 credits to use right away.
                 </h2>
-                <div className="mx-auto xl:ml-0 xl:mr-auto w-[170px] h-[51px] ">
-                  <Link href="/register">
+                <div className=" xl:ml-0 xl:mr-auto w-[170px] h-[51px] ">
+                  <Link tabIndex={-1} href="/register">
                     <Button
                       textColor="text-myWhite"
                       content="REGISTER NOW"

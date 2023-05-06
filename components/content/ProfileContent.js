@@ -144,7 +144,7 @@ export default function ProfileContent() {
 
   return (
     <div className="relative max-w-[1720px] mx-auto">
-      <h1 className="text-[27px] text-myWhite font-serif text-center my-mobMargin px-mobMargin invisible xl:visible absolute -top-[235px] right-0">
+      <h1 className="text-[27px] text-myWhite font-serif text-center my-mobMargin  px-mobMargin invisible xl:visible absolute -top-[235px] right-0 ">
         {randomGreeting} {name}
       </h1>
       <div className="w-full pb-40 max-w-[1920px] xl:flex xl:mt-28">
@@ -156,7 +156,7 @@ export default function ProfileContent() {
             <img
               src={avatarUrl}
               alt="Profile Picture"
-              className="rounded-full h-[300px] w-[300px] xl:h-[400px] xl:w-[400px] mx-auto border-4 border-sunnyOrange"
+              className="object-cover rounded-full h-[300px] w-[300px] xl:h-[400px] xl:w-[400px] mx-auto border-4 border-sunnyOrange"
             ></img>{" "}
             <div className="mx-auto w-fit my-mobMargin h-[53px]">
               <Button content="CHANGE AVATAR" handler={openModal} />
@@ -214,12 +214,23 @@ export default function ProfileContent() {
                     const highestBid = sortedBids[0]?.amount;
 
                     return (
-                      <tr className="w-full" key={index}>
-                        <td className="px-4 py-2 flex relative">
-                          {item.title}
+                      <tr className="w-full flex-col" key={index}>
+                        <div className="flex justify-center">
+                          <td className="px-4 py-2 flex relative">
+                            {item.title}
+                          </td>
+                        </div>
+                        <td className="px-4 py-2">
+                          {" "}
+                          <div className="flex justify-center">
+                            {item.bids.length}{" "}
+                          </div>
                         </td>
-                        <td className="px-4 py-2">{item.bids.length}</td>
-                        <td className="px-4 py-2">{highestBid}</td>
+
+                        <div className="flex justify-center">
+                          {" "}
+                          <td className="px-4 py-2">{highestBid}</td>
+                        </div>
                       </tr>
                     );
                   })}
@@ -266,7 +277,7 @@ export default function ProfileContent() {
 
       <section className="hidden xl:flex max-w-[1920px] gap-[86px] mx-auto pb-[100px]">
         <div className="bg-midnightBlue w-full text-myWhite p-mobMargin drop-shadow-button">
-          <h1 className="text-[27px] font-serif pb-mobMargin">
+          <h1 className="ml-mobMargin mt-2 text-[27px] font-serif pb-mobMargin">
             Winning History:
           </h1>
 
@@ -284,7 +295,6 @@ export default function ProfileContent() {
                   (a, b) => b.amount - a.amount
                 );
 
-                // console.log(sortedBids);
                 const highestBid = sortedBids[0]?.amount;
 
                 return (

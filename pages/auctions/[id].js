@@ -24,6 +24,7 @@ import BidOnAuction from "@/components/api/post/BidOnAuction";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import IsLoggedIn from "@/components/tools/IsLoggedIn";
+import ClientOnly from "@/components/tools/ClientOnly";
 
 export default function AuctionItem({ data, id, errorMessage }) {
   const router = useRouter();
@@ -38,7 +39,6 @@ export default function AuctionItem({ data, id, errorMessage }) {
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   const defaultImage = "/images/defaultProduct.avif";
   const defaultAvatar = "/images/defaultProfile.jpg";
-  const liKey = "font-semibold mr-4";
   let amount = parseInt(bid);
 
   const toggleRows = () => {
@@ -107,6 +107,10 @@ export default function AuctionItem({ data, id, errorMessage }) {
     return <div className="p-4 text-red-500">{errorMessage}</div>;
   }
 
+  const handleImageError = (e) => {
+    e.target.src = defaultImage;
+  };
+
   return (
     <>
       <Head>
@@ -131,6 +135,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                     alt="Default Image"
                     className="slide object-cover h-96 w-full cursor-pointer"
                     onClick={() => setModalOpen(true)}
+                    onError={handleImageError}
                   />
                 ) : (
                   <img
@@ -138,6 +143,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                     alt={`Slide ${currentSlide + 1}`}
                     className="slide object-cover h-96 w-full cursor-pointer"
                     onClick={() => setModalOpen(true)}
+                    onError={handleImageError}
                   />
                 )}
                 {isModalOpen && (
@@ -187,58 +193,64 @@ export default function AuctionItem({ data, id, errorMessage }) {
                   </>
                 )}
               </div>
-              <div className="p-mobMargin">
-                <h1 className="text-myWhite font-serif text-[27px]">
+              <div className="p-mobMargin ">
+                <h1 className="text-myWhite font-serif text-[27px] mb-8 mx-mobMargin">
                   {data.title}
                 </h1>
-                <ul className="flex-col font-sans text-[18px] text-myWhite">
-                  <li>
-                    {" "}
-                    <span className={liKey}>Listed date:</span>
-                    {new Intl.DateTimeFormat("nb-NO", options).format(
-                      new Date(data.created)
-                    )}
-                  </li>
-                  <li>
-                    {" "}
-                    <span className={liKey}>Updated:</span>
-                    {new Intl.DateTimeFormat("nb-NO", options).format(
-                      new Date(data.updated)
-                    )}
-                  </li>
-                  <li>
-                    {" "}
-                    <span className={liKey}>Ends:</span>
-                    <FormatDate date={data.endsAt} />
-                  </li>
-                  <li>
-                    {" "}
-                    <span className={liKey}>Current Bid:</span>
-                    {highestBidAmount} Credits
-                  </li>
-                </ul>
+
+                <table className="text-myWhite font-sans text-[18px] ml-mobMargin w-fit flex ">
+                  <tbody>
+                    <tr>
+                      <td className="font-semibold pb-3">Listed date:</td>
+                      <td className="pl-10 pb-3">
+                        {new Intl.DateTimeFormat("nb-NO", options).format(
+                          new Date(data.created)
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-semibold pb-3">Updated:</td>
+                      <td className="pl-10 pb-3">
+                        {new Intl.DateTimeFormat("nb-NO", options).format(
+                          new Date(data.updated)
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-semibold pb-3">Ends:</td>
+                      <td className="pl-10 pb-3">
+                        <FormatDate date={data.endsAt} />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-semibold pb-3">Current Bid:</td>
+                      <td className="pl-10 pb-3">{highestBidAmount} Credits</td>
+                    </tr>
+                    <IsLoggedIn>
+                      <tr>
+                        <td className="font-semibold pb-3">Your Credits:</td>
+                        <td className="pl-10 pb-3">{user.credits} Credits</td>
+                      </tr>
+                    </IsLoggedIn>
+                  </tbody>
+                </table>
+
                 <form>
-                  <div className="m-mobMargin">
+                  <div className="my-mobMargin">
                     <GenericInput
                       onInputChange={bidValue}
-                      label="Your Bid*"
+                      label="Your Bid* "
                       validation="bid"
                       error="You have to enter a bid higher than the current one"
                       empty={emptyField === "bid" && !bidValid ? "bid" : ""}
                       type="number"
                     />
                   </div>
-                  <ul className="flex-col font-sans text-[18px] text-myWhite">
-                    <li>
-                      {" "}
-                      <span className={liKey}>Your Credits:</span>
-                      {user.credits} Credits
-                    </li>
-                  </ul>
+
                   <div className="w-fit mx-auto my-mobMargin h-[53px]">
                     <IsLoggedIn
                       fallback={
-                        <Link href="/login">
+                        <Link tabIndex={-1} href="/login">
                           <Button content="SIGN IN TO BID" />
                         </Link>
                       }
@@ -290,12 +302,13 @@ export default function AuctionItem({ data, id, errorMessage }) {
               <img
                 src={data.seller.avatar ? data.seller.avatar : defaultAvatar}
                 alt="Profile Picture"
-                className="rounded-full h-[250px] w-[250px] mx-auto border-4 border-sunnyOrange"
+                className=" object-cover rounded-full h-[250px] w-[250px] mx-auto border-4 border-sunnyOrange"
+                onError={handleImageError}
               ></img>
-              <h1 className="font-button text-[20px] mx-auto w-fit my-mobMargin">
+              <h1 className="font-button text-[20px] mx-auto w-fit mt-mobMargin mb-2">
                 {data.seller.name}
               </h1>
-              <p className="font-sans w-fit mx-auto pb-mobMargin">
+              <p className="font-sans w-fit mx-auto pb-6">
                 {data.seller.email}
               </p>
               <p className="font-sans w-fit mx-auto">
@@ -320,19 +333,27 @@ export default function AuctionItem({ data, id, errorMessage }) {
                 </thead>
                 <tbody>
                   {sortedBids.map((bidder, index) => (
-                    <tr className=" w-full" key={index}>
-                      <td className=" px-4 py-2 flex relative">
-                        {" "}
-                        {bidder.amount === highestBid && (
-                          <FaCrown className="-left-2 top-[28%] my-auto text-sunnyOrange absolute " />
-                        )}{" "}
-                        {bidder.bidderName}{" "}
-                      </td>
+                    <tr className=" w-full flex-col" key={index}>
+                      <div className="flex justify-center">
+                        <td className="px-4 py-2 flex relative">
+                          {" "}
+                          {bidder.amount === highestBid && (
+                            <FaCrown className="-left-2 top-[28%] my-auto text-sunnyOrange absolute " />
+                          )}{" "}
+                          {bidder.bidderName}{" "}
+                        </td>
+                      </div>
                       <td className="px-4 py-2">
-                        {" "}
-                        <DateNTime date={bidder.created} />
+                        <div className="flex justify-center">
+                          {" "}
+                          <DateNTime date={bidder.created} />
+                        </div>
                       </td>
-                      <td className=" px-4 py-2">{bidder.amount}</td>
+
+                      <div className="flex justify-center">
+                        {" "}
+                        <td className="px-4 py-2">{bidder.amount}</td>
+                      </div>
                     </tr>
                   ))}
                 </tbody>
@@ -349,18 +370,20 @@ export default function AuctionItem({ data, id, errorMessage }) {
               className="w-full h-full pb-mobMargin"
               style={{ overflowY: "auto" }}
             >
-              <div className=" h-fit w-fit mx-auto mt-12">
+              <div className=" h-fit w-fit max-w-screen-lg   mx-auto mt-12">
                 {!data?.media || data?.media?.length === 0 ? (
                   <img
                     src={defaultImage}
                     alt="Default Image"
                     className="slide object-cover "
+                    onError={handleImageError}
                   />
                 ) : (
                   <img
                     src={data.media[currentSlide]}
                     alt={`Slide ${currentSlide + 1}`}
                     className="slide object-cover cursor-pointer"
+                    onError={handleImageError}
                   />
                 )}
               </div>
@@ -382,6 +405,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                       alt="Default Image"
                       className="slide object-cover  w-[817px] h-[797px] cursor-pointer "
                       onClick={() => setModalOpen(true)}
+                      onError={handleImageError}
                     />
                   ) : (
                     <img
@@ -389,6 +413,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                       alt={`Slide ${currentSlide + 1}`}
                       className="slide object-cover  w-[817px] h-[797px]  cursor-pointer"
                       onClick={() => setModalOpen(true)}
+                      onError={handleImageError}
                     />
                   )}
 
@@ -412,43 +437,50 @@ export default function AuctionItem({ data, id, errorMessage }) {
               </div>
 
               <div className="w-[817px] h-[797px] bg-midnightBlue mr-[100px] drop-shadow-button">
-                <div>
-                  <h1 className="text-myWhite font-serif text-[38px] mb-8 px-[100px] pt-[100px]">
+                <div className="max-w-[500px] mx-auto">
+                  <h1 className="text-myWhite font-serif text-[38px] ml-[70px] mb-8 pt-[100px]">
                     {data.title}
                   </h1>
-                  <ul className="flex-col font-sans text-[18px] text-myWhite px-[100px]">
-                    <li className="mb-4">
-                      {" "}
-                      <span className={liKey}>Listed date:</span>
-                      {new Intl.DateTimeFormat("nb-NO", options).format(
-                        new Date(data.created)
-                      )}
-                    </li>
-                    <li className="mb-4">
-                      {" "}
-                      <span className={liKey}>Updated:</span>
-                      {new Intl.DateTimeFormat("nb-NO", options).format(
-                        new Date(data.updated)
-                      )}
-                    </li>
-                    <li className="mb-4">
-                      {" "}
-                      <span className={liKey}>Ends:</span>
-                      <FormatDate date={data.endsAt} />
-                    </li>
-                    <li className="mb-4">
-                      {" "}
-                      <span className={liKey}>Current Bid:</span>
-                      {highestBidAmount} Credits
-                    </li>
-                    <li>
-                      {" "}
-                      <span className={liKey}>Your Credits:</span>
-                      {user.credits} Credits
-                    </li>
-                  </ul>
+                  <table className="text-myWhite font-sans text-[18px] ml-[70px] w-fit flex ">
+                    <tbody>
+                      <tr>
+                        <td className="font-semibold pb-3">Listed date:</td>
+                        <td className="pl-10 pb-3">
+                          {new Intl.DateTimeFormat("nb-NO", options).format(
+                            new Date(data.created)
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-semibold pb-3">Updated:</td>
+                        <td className="pl-10 pb-3">
+                          {new Intl.DateTimeFormat("nb-NO", options).format(
+                            new Date(data.updated)
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-semibold pb-3">Ends:</td>
+                        <td className="pl-10 pb-3">
+                          <FormatDate date={data.endsAt} />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-semibold pb-3">Current Bid:</td>
+                        <td className="pl-10 pb-3">
+                          {highestBidAmount} Credits
+                        </td>
+                      </tr>
+                      <IsLoggedIn>
+                        <tr>
+                          <td className="font-semibold pb-3">Your Credits:</td>
+                          <td className="pl-10 pb-3">{user.credits} Credits</td>
+                        </tr>
+                      </IsLoggedIn>
+                    </tbody>
+                  </table>
 
-                  <div className="flex px-[70px] mt-4 h-[150px] max-w-[600px]">
+                  <div className="flex px-[40px] mt-4 h-[150px] max-w-[600px]">
                     <div className=" py-4 w-[300px] ">
                       <GenericInput
                         onInputChange={bidValue}
@@ -466,8 +498,8 @@ export default function AuctionItem({ data, id, errorMessage }) {
                     <div className=" py-4 mx-auto w-[70px]  h-[53px]">
                       <IsLoggedIn
                         fallback={
-                          <Link href="/login">
-                            <Button content="SIGN IN TO BID" />
+                          <Link tabIndex={-1} href="/login">
+                            <Button content="SIGN IN" />
                           </Link>
                         }
                       >
@@ -515,28 +547,31 @@ export default function AuctionItem({ data, id, errorMessage }) {
           <section className="w-full py-mobMargin">
             <div className="flex max-w-[1920px] gap-[86px] mx-auto my-12 px-[100px] ">
               <div className="bg-midnightBlue w-full text-myWhite p-mobMargin drop-shadow-button">
-                <h1 className="text-[27px] font-serif">Seller:</h1>
+                <h1 className="ml-mobMargin mt-2 text-[27px] font-serif">
+                  Seller:
+                </h1>
                 <img
                   src={data.seller.avatar ? data.seller.avatar : defaultAvatar}
                   alt="Profile Picture"
-                  className="rounded-full h-[250px] w-[250px] mx-auto border-4 border-sunnyOrange"
+                  className=" object-cover rounded-full h-[250px] w-[250px] mx-auto border-4 border-sunnyOrange"
+                  onError={handleImageError}
                 ></img>
-                <h1 className="font-button text-[20px] mx-auto w-fit my-mobMargin">
+                <h1 className="font-button text-[20px] mx-auto w-fit mt-mobMargin mb-2">
                   {data.seller.name}
                 </h1>
-                <p className="font-sans w-fit mx-auto pb-mobMargin">
+                <p className="font-sans w-fit mx-auto mb-6">
                   {data.seller.email}
                 </p>
-                <p className="font-sans w-fit mx-auto">
+                <p className="font-sans w-fit mx-auto mb-2">
                   Posted Listings: {profile?._count?.listings} Items
                 </p>
               </div>
 
               <div className="bg-midnightBlue w-full text-myWhite p-mobMargin drop-shadow-button">
-                <h1 className="text-[27px] font-serif pb-mobMargin">
+                <h1 className=" ml-mobMargin mt-2 text-[27px] font-serif pb-mobMargin">
                   Description:
                 </h1>
-                <p>{data.description}</p>
+                <p className="ml-mobMargin">{data.description}</p>
               </div>
             </div>
           </section>
@@ -544,7 +579,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
           <section className="w-full bg-plumWine py-mobMargin  ">
             <div className="flex max-w-[1920px] gap-[86px] mx-auto my-12 px-[100px] ">
               <div className="bg-midnightBlue w-full text-myWhite p-mobMargin drop-shadow-button">
-                <h1 className="text-[27px] font-serif pb-mobMargin">
+                <h1 className="ml-mobMargin mt-2 text-[27px] font-serif pb-mobMargin">
                   Bidding History:
                 </h1>
 
@@ -558,7 +593,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                   </thead>
                   <tbody className="table-fixed w-full">
                     {sortedBids.slice(0, 5).map((bidder, index) => (
-                      <tr className="w-full flex-col" key={index}>
+                      <tr className="w-full" key={index}>
                         <div className="flex justify-center ">
                           <td className="px-4 py-2 flex relative">
                             {bidder.amount === highestBid && (
@@ -588,8 +623,10 @@ export default function AuctionItem({ data, id, errorMessage }) {
                         <td colSpan="3">
                           <div className="flex justify-center min-h-[50px]">
                             <span
+                              tabIndex={0}
                               className="cursor-pointer"
                               onClick={toggleRows}
+                              onKeyPress={toggleRows}
                             >
                               <MdOutlineKeyboardArrowDown className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
                             </span>
@@ -600,7 +637,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
 
                     {showRows &&
                       sortedBids.slice(5).map((bidder, index) => (
-                        <tr className="w-full flex-col" key={index}>
+                        <tr className="w-full" key={index}>
                           <div className="flex justify-center ">
                             <td className="px-4 py-2 flex relative">
                               {bidder.amount === highestBid && (
@@ -630,8 +667,10 @@ export default function AuctionItem({ data, id, errorMessage }) {
                         <td colSpan="3">
                           <div className="flex justify-center min-h-[50px]">
                             <span
+                              tabIndex={0}
                               className="cursor-pointer"
                               onClick={toggleRows}
+                              onKeyPress={toggleRows}
                             >
                               <MdOutlineKeyboardArrowUp className="h-[44px] w-[44px] hover:h-[50px] hover:w-[50px]" />
                             </span>

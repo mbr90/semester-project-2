@@ -39,18 +39,18 @@ export default function TextArea(props) {
             onChange={handleInputChange}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            rows={5}
+            rows={6}
             minLength="3"
-            maxLength="140"
+            maxLength="240"
             type={props.type}
             {...props.extra}
           ></textarea>
         </div>
         <div className="flex w-full justify-between pr-[16px]">
           <p className="text-myWhite font-sans font-medium text-[14px] px-[16px] py-1 w-fit">
-            Optional - Describe your item
+            *Required - Describe your item
           </p>
-          <div className="w-fit">{inputValue.length}/140</div>
+          <div className="w-fit">{inputValue.length}/240</div>
         </div>
 
         {props.empty === "email" && (
