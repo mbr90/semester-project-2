@@ -5,7 +5,7 @@ It's a web-based auction project built using Next.js and Tailwind CSS. It allows
 
 ## Description
 
-
+The goal of this assignment is to create a front-end application for an auction website, utilizing skills learned over the past three semesters. Users with a stud.noroff.no email can register, login, and perform various actions such as creating listings, bidding, and viewing bids. The project uses an existing API and adhere to specific technical restrictions, such as using approved CSS frameworks, hosting services, design applications, and planning applications. Deliverables include a Gantt chart, design prototype, style guide, kanban project board, repository link, and hosted application demo link.
 
 
 ## Delivery
