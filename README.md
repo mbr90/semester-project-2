@@ -1,4 +1,4 @@
-#Semester Project 2
+##Semester Project 2
 This is my submission for Semester Project 2 for the Front-end programme at Noroff school of technology and digital media. 
 
 
