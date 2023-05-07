@@ -224,94 +224,102 @@ export default function Auction() {
               })}
           </div>
 
-          <section className="hidden sm:flex max-w-[577px] xl:max-w-[1720px] w-fit  flex-wrap  mx-auto  my-mobMargin px-mobMargin">
-            {offset > 0 && (
-              <div
-                onClick={handlePrevPage}
-                onKeyPress={handlePrevPage}
-                tabIndex={0}
-                className="w-fit h-fit cursor-pointer flex my-auto text-myWhite hover:underline"
-              >
-                <MdArrowBackIos className="w-fit h-fit my-auto" />
-                <span>Prev</span>
-              </div>
-            )}
-            <div className="pagination flex items-center mx-4  text-myWhite">
-              {Array.from({ length: maxPages }, (_, index) => (
-                <button
-                  key={index}
-                  className={`mx-[6px] ${
-                    offset / 30 === index ? "bg-white text-black" : "text-white"
-                  } ${offset / 30 === index ? "underline font-bold" : ""}`}
-                  onClick={() => {
-                    setOffset(index * 30);
-                    scrollToTopRef.current.scrollIntoView({
-                      behavior: "auto",
-                    });
-                  }}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
-            {offset / 30 < maxPages - 1 && (
-              <div
-                onClick={handleNextPage}
-                onKeyPress={handleNextPage}
-                tabIndex={0}
-                className="w-fit h-fit cursor-pointer flex my-auto text-myWhite hover:underline"
-              >
-                <span>Next</span>{" "}
-                <MdArrowForwardIos className="w-fit h-fit my-auto" />
-              </div>
-            )}
-          </section>
-
-          <section className="sm:hidden  flex-col max-w-[577px] w-fit  mx-auto  my-mobMargin px-mobMargin">
-            <div className="pagination flex items-center mx-4 flex-wrap  text-myWhite">
-              {Array.from({ length: maxPages }, (_, index) => (
-                <button
-                  key={index}
-                  className={`mx-[6px] ${
-                    offset / 30 === index ? "bg-white text-black" : "text-white"
-                  } ${offset / 30 === index ? "underline font-bold" : ""}`}
-                  onClick={() => {
-                    setOffset(index * 30);
-                    scrollToTopRef.current.scrollIntoView({
-                      behavior: "auto",
-                    });
-                  }}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
-
-            <div className="py-4 w-full flex justify-between px-[5px]">
-              {offset > 0 && (
-                <div
-                  onClick={handlePrevPage}
-                  onKeyPress={handlePrevPage}
-                  tabIndex={0}
-                  className="w-fit h-fit cursor-pointer mr-auto ml-0 flex my-auto text-myWhite hover:underline"
-                >
-                  <MdArrowBackIos className="w-fit h-fit my-auto" />
-                  <span>Prev</span>
+          {searchValue === "" && (
+            <>
+              <section className="hidden sm:flex max-w-[577px] xl:max-w-[1720px] w-fit  flex-wrap  mx-auto  my-mobMargin px-mobMargin">
+                {offset > 0 && (
+                  <div
+                    onClick={handlePrevPage}
+                    onKeyPress={handlePrevPage}
+                    tabIndex={0}
+                    className="w-fit h-fit cursor-pointer flex my-auto text-myWhite hover:underline"
+                  >
+                    <MdArrowBackIos className="w-fit h-fit my-auto" />
+                    <span>Prev</span>
+                  </div>
+                )}
+                <div className="pagination flex items-center mx-4  text-myWhite">
+                  {Array.from({ length: maxPages }, (_, index) => (
+                    <button
+                      key={index}
+                      className={`mx-[6px] ${
+                        offset / 30 === index
+                          ? "bg-white text-black"
+                          : "text-white"
+                      } ${offset / 30 === index ? "underline font-bold" : ""}`}
+                      onClick={() => {
+                        setOffset(index * 30);
+                        scrollToTopRef.current.scrollIntoView({
+                          behavior: "auto",
+                        });
+                      }}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
                 </div>
-              )}
-              {offset / 30 < maxPages - 1 && (
-                <div
-                  onClick={handleNextPage}
-                  onKeyPress={handleNextPage}
-                  tabIndex={0}
-                  className="w-fit h-fit cursor-pointer flex my-auto ml-auto mr-0 text-myWhite hover:underline"
-                >
-                  <span>Next</span>
-                  <MdArrowForwardIos className="w-fit h-fit my-auto" />
+                {offset / 30 < maxPages - 1 && (
+                  <div
+                    onClick={handleNextPage}
+                    onKeyPress={handleNextPage}
+                    tabIndex={0}
+                    className="w-fit h-fit cursor-pointer flex my-auto text-myWhite hover:underline"
+                  >
+                    <span>Next</span>{" "}
+                    <MdArrowForwardIos className="w-fit h-fit my-auto" />
+                  </div>
+                )}
+              </section>
+
+              <section className="sm:hidden  flex-col max-w-[577px] w-fit  mx-auto  my-mobMargin px-mobMargin">
+                <div className="pagination flex items-center mx-4 flex-wrap  text-myWhite">
+                  {Array.from({ length: maxPages }, (_, index) => (
+                    <button
+                      key={index}
+                      className={`mx-[6px] ${
+                        offset / 30 === index
+                          ? "bg-white text-black"
+                          : "text-white"
+                      } ${offset / 30 === index ? "underline font-bold" : ""}`}
+                      onClick={() => {
+                        setOffset(index * 30);
+                        scrollToTopRef.current.scrollIntoView({
+                          behavior: "auto",
+                        });
+                      }}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
                 </div>
-              )}
-            </div>
-          </section>
+
+                <div className="py-4 w-full flex  px-5">
+                  {offset > 0 && (
+                    <div
+                      onClick={handlePrevPage}
+                      onKeyPress={handlePrevPage}
+                      tabIndex={0}
+                      className="w-fit h-fit cursor-pointer mr-auto ml-0 flex my-auto text-myWhite hover:underline"
+                    >
+                      <MdArrowBackIos className="w-fit h-fit my-auto" />
+                      <span>Prev</span>
+                    </div>
+                  )}
+                  {offset / 30 < maxPages - 1 && (
+                    <div
+                      onClick={handleNextPage}
+                      onKeyPress={handleNextPage}
+                      tabIndex={0}
+                      className="w-fit h-fit cursor-pointer flex my-auto ml-auto mr-0 text-myWhite hover:underline"
+                    >
+                      <span>Next</span>
+                      <MdArrowForwardIos className="w-fit h-fit my-auto" />
+                    </div>
+                  )}
+                </div>
+              </section>
+            </>
+          )}
         </div>
       </main>
       <Footer />

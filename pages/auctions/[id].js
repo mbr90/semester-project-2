@@ -227,8 +227,12 @@ export default function AuctionItem({ data, id, errorMessage }) {
                     </tr>
                     <IsLoggedIn>
                       <tr>
-                        <td className="font-semibold pb-3">Your Credits:</td>
-                        <td className="pl-10 pb-3">{user.credits} Credits</td>
+                        <td className="font-semibold text-sunnyOrange pb-3">
+                          Your Credits:
+                        </td>
+                        <td className="pl-10 pb-3 font-semibold text-sunnyOrange">
+                          {user.credits} Credits
+                        </td>
                       </tr>
                     </IsLoggedIn>
                   </tbody>
@@ -467,8 +471,12 @@ export default function AuctionItem({ data, id, errorMessage }) {
                       </tr>
                       <IsLoggedIn>
                         <tr>
-                          <td className="font-semibold pb-3">Your Credits:</td>
-                          <td className="pl-10 pb-3">{user.credits} Credits</td>
+                          <td className="font-semibold pb-3 text-sunnyOrange">
+                            Your Credits:
+                          </td>
+                          <td className="pl-10 pb-3 font-semibold text-sunnyOrange">
+                            {user.credits} Credits
+                          </td>
                         </tr>
                       </IsLoggedIn>
                     </tbody>
