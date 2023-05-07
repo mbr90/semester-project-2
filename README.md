@@ -1,6 +1,6 @@
 # Semester Project 2
 
-This is my submission for Semester Project 2 for the Front-end programme at Noroff school of technology and digital media. 
+This is my submission for Semester Project 2 for the Front-end developer course at Noroff school of technology and digital media. 
 It's a web-based auction project built using Next.js and Tailwind CSS. It allows users to create auctions for various items and accept bids from other users.
 
 ## Description
