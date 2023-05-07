@@ -1,3 +1,9 @@
+#Semester Project 2
+This is my submission for Semester Project 2 for the Front-end programme at Noroff school of technology and digital media. 
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
