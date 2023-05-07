@@ -23,13 +23,13 @@ import Username from "../tools/Username";
 const ProfileURL = "https://api.noroff.dev/api/v1/auction/profiles/";
 
 const activeLink = "flex text-myWhite font-bold underline";
-const sleepLink = "flex text-whyte";
+const sleepLink = "flex text-whyte opacity-[.7]";
 
 const burgerItem =
-  "hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin border-t-2 font-button  text-[20px] flex w-full";
+  "hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin border-t-2 font-button  text-[20px] flex w-full opacity-[.7]";
 
 const activeBurger =
-  "hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin border-t-2 font-bold  text-[20px] underline flex w-full";
+  "hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin border-t-2 font-bold  text-[20px] underline flex w-full opacity-1";
 
 const burgerIcon = "w-[30px] h-[30px] mr-2";
 
