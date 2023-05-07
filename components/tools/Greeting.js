@@ -12,5 +12,5 @@ export default function Greeting() {
     }
   };
 
-  return <div>{getGreeting()}</div>;
+  return <div className="mr-2">{getGreeting()}, </div>;
 }

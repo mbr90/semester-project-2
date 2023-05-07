@@ -48,14 +48,9 @@ export default function AuctionMessage({ onInputChange }) {
           }
         >
           <div className="xl:w-[33%]">
-            <h1 className=" text-myWhite font-serif text-[27px] flex-col">
-              <div className="w-fit flex">
-                <Greeting />,
-              </div>
-              <h1 className="break-words">
-                {" "}
-                {Username()?.charAt(0).toUpperCase() + Username()?.slice(1)}
-              </h1>
+            <h1 className=" text-myWhite font-serif text-[27px] flex flex-wrap">
+              <Greeting />
+              {Username()?.charAt(0).toUpperCase() + Username()?.slice(1)}
             </h1>
             <h2 className="font-sans text-myWhite  text-[18px] mt-6 mb-10  w-fit ">
               {
