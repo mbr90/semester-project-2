@@ -265,11 +265,7 @@ export default function Header() {
       {/* Mobile Menu */}
 
       {showMenu && (
-        <section
-          className={`bg-myWhite w-full drop-shadow-button xl:hidden ${
-            showMenu ? "animate-mobAnimation  " : "animate-mobOutAnimation "
-          }`}
-        >
+        <section className="bg-myWhite w-full drop-shadow-button xl:hidden ">
           <ul className="flex-col">
             <IsLoggedIn
               fallback={
