@@ -1,42 +1,81 @@
-##Semester Project 2
+# Semester Project 2
+
 This is my submission for Semester Project 2 for the Front-end programme at Noroff school of technology and digital media. 
+It's a web-based auction project built using Next.js and Tailwind CSS. It allows users to create auctions for various items and accept bids from other users.
+
+## Description
 
 
 
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Delivery
+
+| Resource | URL |
+|----------|-----|
+|Gantt Chart|https://bronzed-gateway-a40.notion.site/37aa1a1578ac4ed3bde004e2af246e2d?v=41ee872f00854731b9aa176cc00a2181|
+|Kanban Board|https://bronzed-gateway-a40.notion.site/37aa1a1578ac4ed3bde004e2af246e2d?v=5fe16de792c24939ad32c6965c603d4d|
+|Desktop Prototype|https://xd.adobe.com/view/fde22dd3-f21d-4400-8be7-391be136ce03-a8b1/|
+|Web Prototype|https://xd.adobe.com/view/1da545ba-fafa-4ae4-ab78-44106de01e31-48f6/|
+|Style Guide|https://xd.adobe.com/view/ebd63c66-8217-4ce3-8610-2daac5801927-be85/|
+|Hosted Demo|https://leafy-beijinho-d035c5.netlify.app/|
 
 ## Getting Started
 
-Installing
+To get started with the project, follow these steps:
 
-Clone the repo
+Clone the repository to your local machine:
 
-Then, run the development server:
+    git clone https://github.com/your-username/auction-project.git
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Install the dependencies:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    npm install
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Run the development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    npm run dev
 
-## Learn More
+The application will now be available at http://localhost:3000.
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*  User authentication: users can sign up, log in, and log out.
+*  Auction creation: registered users can create auctions for various items.
+*  Bid acceptance: registered users can accept bids from other users.
+*  A registered user can update their avatar.
+*  A a registered user can view their total credit.
+*  Un registered useres may search through Listing's.
+ 
+## Technology Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+*  ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) server-side rendering framework for React. 
+*  ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) CSS framework for rapid UI development.
 
-## Deployed on Netlify
 
-A hosted application demo is availiable on Netlify: https://leafy-beijinho-d035c5.netlify.app/
+
+
+
+
+
+## Contributing
+
+If you'd like to contribute to the project, follow these steps:
+
+  Fork the repository to your GitHub account.
+  Create a new branch for your changes.
+  Make your changes and commit them with a descriptive message.
+  Push your changes to your forked repository.
+  Open a pull request to the original repository.
+    
+    
+## License
+
+  This project is licensed under the MIT License.
+  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+
+
+
+
