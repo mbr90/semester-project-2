@@ -1,14 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function TextArea(props) {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [rows, setRows] = useState(6);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInputValue(value);
     props.onInputChange(value);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 475) {
+        setRows(6);
+      } else if (window.innerWidth >= 430) {
+        setRows(8);
+      } else if (window.innerWidth >= 370) {
+        setRows(10);
+      } else {
+        setRows(18);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className="flex-col mx-auto w-full px-mobMargin">
@@ -39,7 +61,7 @@ export default function TextArea(props) {
             onChange={handleInputChange}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
-            rows={6}
+            rows={rows}
             minLength="3"
             maxLength="240"
             type={props.type}
