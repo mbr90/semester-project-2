@@ -184,7 +184,7 @@ export default function RegisterUser() {
           </div>
         </form>
         {errorMessage !== "" && (
-          <div className="text-sunnyOrange mt-mobMargin  w-fit mx-auto ">
+          <div className="text-sunnyOrange mt-mobMargin pt-mobMargin px-mobMargin  w-fit mx-auto ">
             {errorMessage}
           </div>
         )}

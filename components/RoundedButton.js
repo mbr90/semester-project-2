@@ -15,7 +15,7 @@ export default function RoundedButton(props) {
         {content}
       </button>
       <div
-        className={`${secColor} z-20 absolute top-0 left-0 rounded-full text-xl font-button font-semibold  h-[51px] px-[16px] group-hover:ml-[12px] group-hover:mt-[10px] drop-shadow-button`}
+        className={`${secColor} hidden sm:block z-20 absolute top-0 left-0 rounded-full text-xl font-button font-semibold  h-[51px] px-[16px] group-hover:ml-[12px] group-hover:mt-[10px] drop-shadow-button`}
       >
         <p className="invisible"> {content}</p>
       </div>

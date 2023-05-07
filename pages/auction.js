@@ -287,7 +287,7 @@ export default function Auction() {
               ))}
             </div>
 
-            <div className="py-2 w-full flex justify-between">
+            <div className="py-4 w-full flex justify-between px-[5px]">
               {offset > 0 && (
                 <div
                   onClick={handlePrevPage}
@@ -306,7 +306,7 @@ export default function Auction() {
                   tabIndex={0}
                   className="w-fit h-fit cursor-pointer flex my-auto ml-auto mr-0 text-myWhite hover:underline"
                 >
-                  <span>Next</span>{" "}
+                  <span>Next</span>
                   <MdArrowForwardIos className="w-fit h-fit my-auto" />
                 </div>
               )}

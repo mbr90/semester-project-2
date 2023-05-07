@@ -193,11 +193,11 @@ export default function AuctionItem({ data, id, errorMessage }) {
                 )}
               </div>
               <div className="p-mobMargin ">
-                <h1 className="text-myWhite font-serif text-[27px] mb-8 mx-mobMargin">
+                <h1 className="text-myWhite font-serif text-[27px] mb-8 ">
                   {data.title}
                 </h1>
 
-                <table className="text-myWhite font-sans text-[18px] ml-mobMargin w-fit flex ">
+                <table className="text-myWhite font-sans text-[18px]  w-fit flex ">
                   <tbody>
                     <tr>
                       <td className="font-semibold pb-3">Listed date:</td>
@@ -235,7 +235,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                 </table>
 
                 <form>
-                  <div className="my-mobMargin">
+                  <div className="my-mobMargin ">
                     <GenericInput
                       onInputChange={bidValue}
                       label="Your Bid* "
@@ -329,7 +329,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
           </Accordion>
           <Accordion title="Bidding History">
             <div className="bg-midnightBlue w-full text-myWhite p-mobMargin">
-              <table className="text-myWhite mx-auto w-[80%] ">
+              <table className="text-myWhite mx-auto w-full max-w-[400px] ">
                 <tbody>
                   <tr className="font-sans text-[20px] font-bold">
                     <td className="pb-4">Bidder</td>
@@ -582,7 +582,7 @@ export default function AuctionItem({ data, id, errorMessage }) {
                 <h1 className="ml-mobMargin mt-2 text-[27px] font-serif pb-mobMargin">
                   Bidding History:
                 </h1>
-                <table className="text-myWhite mx-auto w-[80%] ">
+                <table className="text-myWhite mx-auto w-[800px] ">
                   <tbody>
                     <tr className="font-sans text-[20px] font-bold">
                       <td className="pb-4">Bidder</td>
