@@ -200,8 +200,8 @@ export default function ProfileContent() {
         <div className="xl:hidden">
           <Accordion title="Winning History">
             {" "}
-            <div className="w-full bg-midnightBlue">
-              <table className="w-[70%] text-myWhite mx-auto">
+            <div className="w-full bg-midnightBlue p-mobMargin">
+              <table className="w-full max-w-[400px] text-myWhite mx-auto">
                 <tbody>
                   <tr className="font-sans text-[20px] font-bold">
                     <td className="pb-4">Item</td>
