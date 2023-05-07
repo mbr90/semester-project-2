@@ -117,7 +117,7 @@ export default function RegisterUser() {
   };
 
   return (
-    <div className="w-full px-[100px]">
+    <div className="w-full xl:px-[100px]">
       <div className="w-full bg-midnightBlue flex-col h-full py-mobMargin max-w-[1720px] mx-auto">
         <Image
           className="w-[370px] h-auto my-auto mx-auto py-mobMargin"

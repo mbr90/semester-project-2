@@ -293,7 +293,7 @@ export default function Auction() {
                   onClick={handlePrevPage}
                   onKeyPress={handlePrevPage}
                   tabIndex={0}
-                  className="w-fit h-fit cursor-pointer flex my-auto text-myWhite hover:underline"
+                  className="w-fit h-fit cursor-pointer mr-auto ml-0 flex my-auto text-myWhite hover:underline"
                 >
                   <MdArrowBackIos className="w-fit h-fit my-auto" />
                   <span>Prev</span>
@@ -304,7 +304,7 @@ export default function Auction() {
                   onClick={handleNextPage}
                   onKeyPress={handleNextPage}
                   tabIndex={0}
-                  className="w-fit h-fit cursor-pointer flex my-auto text-myWhite hover:underline"
+                  className="w-fit h-fit cursor-pointer flex my-auto ml-auto mr-0 text-myWhite hover:underline"
                 >
                   <span>Next</span>{" "}
                   <MdArrowForwardIos className="w-fit h-fit my-auto" />
