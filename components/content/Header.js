@@ -264,155 +264,164 @@ export default function Header() {
 
       {/* Mobile Menu */}
 
-      <section
-        className={`bg-myWhite w-full drop-shadow-button xl:hidden ${
-          showMenu ? "animate-mobAnimation  " : "animate-mobOutAnimation hidden"
-        }`}
-      >
-        <ul className="flex-col">
-          <IsLoggedIn
-            fallback={
-              <>
+      {showMenu && (
+        <section
+          className={`bg-myWhite w-full drop-shadow-button xl:hidden ${
+            showMenu ? "animate-mobAnimation  " : "animate-mobOutAnimation "
+          }`}
+        >
+          <ul className="flex-col">
+            <IsLoggedIn
+              fallback={
+                <>
+                  <li
+                    onClick={handleClick}
+                    className="hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin font-button  text-[20px]"
+                  >
+                    <MdClose className={burgerIcon} />
+                  </li>
+                  <Link href="/" className="flex">
+                    {" "}
+                    <li
+                      className={
+                        currentRoute === `/` ? activeBurger : burgerItem
+                      }
+                    >
+                      {" "}
+                      <MdHome className={burgerIcon} />
+                      Home
+                    </li>{" "}
+                  </Link>
+                  <Link href="/auction" className="flex">
+                    {" "}
+                    <li
+                      className={
+                        currentRoute === `/auction` ? activeBurger : burgerItem
+                      }
+                    >
+                      {" "}
+                      <MdGavel className={burgerIcon} />
+                      Auction
+                    </li>{" "}
+                  </Link>
+
+                  <Link href="/login" className="flex">
+                    {" "}
+                    <li
+                      className={
+                        currentRoute === `/login` ? activeBurger : burgerItem
+                      }
+                    >
+                      <MdLogin className={burgerIcon} />
+                      Sign In
+                    </li>{" "}
+                  </Link>
+
+                  <Link href="/register" className="flex">
+                    {" "}
+                    <li
+                      className={
+                        currentRoute === `/register` ? activeBurger : burgerItem
+                      }
+                    >
+                      <MdPersonAdd className={burgerIcon} />
+                      New User?
+                    </li>{" "}
+                  </Link>
+                </>
+              }
+            >
+              <li
+                onClick={handleClick}
+                className="hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin font-button  text-[20px]"
+              >
+                <div className="flex justify-between w-full font-button font-bold">
+                  <MdClose className={burgerIcon} /> {Username()}
+                </div>
+              </li>
+              <li className=" p-mobMargin border-t-2 font-button  text-[20px] flex w-full">
+                {" "}
+                <div className="flex justify-between w-full font-button font-bold">
+                  {" "}
+                  <div>{data?.credits} Credits</div>{" "}
+                  <div>{userBids?.length} Bids</div>
+                  <div>{data?._count?.listings} Listings</div>
+                </div>
+              </li>{" "}
+              <Link href="/" className="flex">
+                {" "}
                 <li
-                  onClick={handleClick}
-                  className="hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin font-button  text-[20px]"
+                  className={currentRoute === `/` ? activeBurger : burgerItem}
                 >
-                  <MdClose className={burgerIcon} />
-                </li>
-                <Link href="/" className="flex">
                   {" "}
-                  <li
-                    className={currentRoute === `/` ? activeBurger : burgerItem}
-                  >
-                    {" "}
-                    <MdHome className={burgerIcon} />
-                    Home
-                  </li>{" "}
-                </Link>
-                <Link href="/auction" className="flex">
+                  <MdHome className={burgerIcon} />
+                  Home
+                </li>{" "}
+              </Link>
+              <Link href="/auction" className="flex">
+                {" "}
+                <li
+                  className={
+                    currentRoute === `/auction` ? activeBurger : burgerItem
+                  }
+                >
                   {" "}
-                  <li
-                    className={
-                      currentRoute === `/auction` ? activeBurger : burgerItem
-                    }
-                  >
-                    {" "}
-                    <MdGavel className={burgerIcon} />
-                    Auction
-                  </li>{" "}
-                </Link>
-
-                <Link href="/login" className="flex">
+                  <MdGavel className={burgerIcon} />
+                  Auction
+                </li>{" "}
+              </Link>
+              <Link href="/listing" className="flex">
+                <li
+                  className={
+                    currentRoute === `/listing` ? activeBurger : burgerItem
+                  }
+                >
                   {" "}
-                  <li
-                    className={
-                      currentRoute === `/login` ? activeBurger : burgerItem
-                    }
-                  >
-                    <MdLogin className={burgerIcon} />
-                    Sign In
-                  </li>{" "}
-                </Link>
-
-                <Link href="/register" className="flex">
+                  <MdEditSquare className={burgerIcon} />
+                  New Listing
+                </li>{" "}
+              </Link>
+              <Link href={`/profiles/${Username()}`} className="flex">
+                <li
+                  className={
+                    currentRoute === `/profiles/[id]`
+                      ? activeBurger
+                      : burgerItem
+                  }
+                >
                   {" "}
-                  <li
-                    className={
-                      currentRoute === `/register` ? activeBurger : burgerItem
-                    }
-                  >
-                    <MdPersonAdd className={burgerIcon} />
-                    New User?
-                  </li>{" "}
-                </Link>
-              </>
-            }
-          >
-            <li
-              onClick={handleClick}
-              className="hover:text-myWhite hover:bg-burgundyVelvet cursor-pointer p-mobMargin font-button  text-[20px]"
-            >
-              <div className="flex justify-between w-full font-button font-bold">
-                <MdClose className={burgerIcon} /> {Username()}
-              </div>
-            </li>
-            <li className=" p-mobMargin border-t-2 font-button  text-[20px] flex w-full">
-              {" "}
-              <div className="flex justify-between w-full font-button font-bold">
-                {" "}
-                <div>{data?.credits} Credits</div>{" "}
-                <div>{userBids?.length} Bids</div>
-                <div>{data?._count?.listings} Listings</div>
-              </div>
-            </li>{" "}
-            <Link href="/" className="flex">
-              {" "}
-              <li className={currentRoute === `/` ? activeBurger : burgerItem}>
-                {" "}
-                <MdHome className={burgerIcon} />
-                Home
-              </li>{" "}
-            </Link>
-            <Link href="/auction" className="flex">
-              {" "}
-              <li
-                className={
-                  currentRoute === `/auction` ? activeBurger : burgerItem
-                }
+                  <img
+                    src={avatarUrl}
+                    alt="Profile Picture"
+                    className=" object-cover rounded-full h-[30px] w-[30px] my-auto mr-2 "
+                  ></img>{" "}
+                  Show Profile
+                </li>{" "}
+              </Link>
+              <Link
+                href={`/profiles/bids&listings/${Username()}`}
+                className="flex"
               >
-                {" "}
-                <MdGavel className={burgerIcon} />
-                Auction
+                <li
+                  className={
+                    currentRoute === `/profiles/bids&listings/[id]`
+                      ? activeBurger
+                      : burgerItem
+                  }
+                >
+                  {" "}
+                  <MdCurrencyExchange className={burgerIcon} /> My Bids &
+                  Listings
+                </li>{" "}
+              </Link>
+              <li className={burgerItem} onClick={handleLogout}>
+                <MdLogout className={burgerIcon} />
+                Sign Out
               </li>{" "}
-            </Link>
-            <Link href="/listing" className="flex">
-              <li
-                className={
-                  currentRoute === `/listing` ? activeBurger : burgerItem
-                }
-              >
-                {" "}
-                <MdEditSquare className={burgerIcon} />
-                New Listing
-              </li>{" "}
-            </Link>
-            <Link href={`/profiles/${Username()}`} className="flex">
-              <li
-                className={
-                  currentRoute === `/profiles/[id]` ? activeBurger : burgerItem
-                }
-              >
-                {" "}
-                <img
-                  src={avatarUrl}
-                  alt="Profile Picture"
-                  className=" object-cover rounded-full h-[30px] w-[30px] my-auto mr-2 "
-                ></img>{" "}
-                Show Profile
-              </li>{" "}
-            </Link>
-            <Link
-              href={`/profiles/bids&listings/${Username()}`}
-              className="flex"
-            >
-              <li
-                className={
-                  currentRoute === `/profiles/bids&listings/[id]`
-                    ? activeBurger
-                    : burgerItem
-                }
-              >
-                {" "}
-                <MdCurrencyExchange className={burgerIcon} /> My Bids & Listings
-              </li>{" "}
-            </Link>
-            <li className={burgerItem} onClick={handleLogout}>
-              <MdLogout className={burgerIcon} />
-              Sign Out
-            </li>{" "}
-          </IsLoggedIn>
-        </ul>
-      </section>
+            </IsLoggedIn>
+          </ul>
+        </section>
+      )}
     </>
   );
 }
