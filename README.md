@@ -1,4 +1,5 @@
 # Semester Project 2
+![image](https://github.com/mbr90/semester-project-2/blob/main/public/images/salechampzCard.jpg?raw=true)
 
 This is my submission for Semester Project 2 for the Front-end developer course at Noroff school of technology and digital media. 
 It's a web-based auction project built using Next.js and Tailwind CSS. It allows users to create auctions for various items and accept bids from other users.
