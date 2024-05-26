@@ -26,7 +26,7 @@ To get started with the project, follow these steps:
 
 Clone the repository to your local machine:
 
-    git clone https://github.com/your-username/auction-project.git
+    git clone https://github.com/mbr90/semester-project-2
 
 Install the dependencies:
 
